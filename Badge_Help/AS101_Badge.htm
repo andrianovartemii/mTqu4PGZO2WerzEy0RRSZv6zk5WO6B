@@ -1,0 +1,1982 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>Designing Instant Help for Windows</TITLE>
+<META NAME="doccomm" CONTENT="Contains macros, styles, toolbar and tutorial for designing help using Microsoft Word for Windows.">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial" SIZE=4><P>Введение</P>
+</B></FONT><FONT FACE="Arial" SIZE=2><P>Редактор макетов печати на пластиковых карточках AS101_Badge (далее - дизайнер макетов) позволяет оформлять внешний вид пластиковых карточек, выдаваемых клиентам системы AS101:</P>
+
+<UL>
+</FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff"><LI>добавлять фоновые рисунки и фирменные логотипы</FONT><FONT FACE="Arial" SIZE=2>;</LI>
+</FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff"><LI>располагать информацию о клиенте и оформлять ее произвольным образом</FONT><FONT FACE="Arial" SIZE=2>;</LI>
+</FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff"><LI>добавлять к карточке OLE-объекты</FONT><FONT FACE="Arial" SIZE=2>.</LI></UL>
+
+</FONT><FONT FACE="Arial" SIZE=2><P>Редактор AS101_Badge основан на широко распространенном дизайнере отчетов. Подключение к серверу базы данных СКД AS101 производится автоматически, а доступ к редактированию макетов определяется паролем, определяемом, задаваемом в конфигурации системы AS101, что позволяет разделить пользователей приложения на администраторов, создающих новые макеты и редактирующих уже существующие, и операторов, которым разрешена только печать</FONT><FONT FACE="Arial" SIZE=2> </FONT><FONT FACE="Arial" SIZE=2>карточек с использованием подготовленных макетов карточек.</P>
+<P>Дизайнер макетов состоит из двух вкладок – вкладки "ДИЗАЙН" и вкладки "НАЗНАЧЕНИЕ МАКЕТОВ И ПЕЧАТЬ КАРТОЧЕК".</P>
+<P>На вкладке "Дизайн" возможно создание нового или редактирование существующего макета карточки, а также просмотр созданного макета с использованием данных из БД AS101.</P>
+<P>На вкладке "Назначение макетов и печать карточек" возможно:</P>
+
+<UL>
+</FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff"><LI>назначение каждому клиенту СКД AS101 какого-либо одного из существующих макетов карточки</FONT><FONT FACE="Arial" SIZE=2>;</LI>
+</FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff"><LI>просмотр внешнего вида карточки клиента в окне предварительного просмотра с дополнительными возможностями коррекции ее внешнего вида </FONT><FONT FACE="Arial" SIZE=2>(не влияющих на макет карточки);</LI>
+</FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff"><LI>печать на принтер, установленный "по умолчанию", сразу многих клиентских карточек</FONT><FONT FACE="Arial" SIZE=2>: возможна печать как по "индивидуально назначенным" макетам, так и печать всего списка отобранных клиентов с каким-нибудь выбранным макетом карточки.</LI></UL>
+
+<P>Учитывая, что пользователю предоставлены возможности выбора принтера и форматов бумаги, AS101_Badge </FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">позволяет создавать фирменные бэджи и другие идентификационные карты</FONT><FONT FACE="Arial" SIZE=2>, на которых необходимо размещать информацию о клиентах, включая фото.</P>
+<P>Возможности дизайнера отчетов позволяют проводить </FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">условное форматирование данных</FONT><FONT FACE="Arial" SIZE=2> и многое другое, хотя это требует некоторых начальных навыков программирования. </P>
+<P>Из соображений безопасности доступа к БД AS101 </FONT><FONT FACE="Arial" SIZE=2 COLOR="#ff0000">весь прямой доступ к данным отключен, также как и возможности редактирования словаря данных</FONT><FONT FACE="Arial" SIZE=2>, имеющегося в</FONT><FONT FACE="Arial" SIZE=2 COLOR="#ff0000"> </FONT><FONT FACE="Arial" SIZE=2>дизайнере отчетов. В связи с этим ряд возможностей построителя отчетов становится недоступен при редактировании макетов, а </FONT><FONT FACE="Arial" SIZE=2 COLOR="#ff0000">весь доступ к данным БД управляется программно без участия пользователя</FONT><FONT FACE="Arial" SIZE=2>.</P>
+</FONT><FONT FACE="Arial" SIZE=2><P>Связь данных клиентов с макетами достигается программным заполнением словаря данных, в связи с чем </FONT><FONT FACE="Arial" SIZE=2 COLOR="#ff0000">возможность редактирования словаря данных также отключена.</FONT><FONT FACE="Arial" SIZE=2> </FONT><FONT FACE="Arial" SIZE=2>При размещении информации о клиентах на макете следует использовать описанную в разделе </FONT><B><FONT FACE="Arial" SIZE=2 COLOR="#008000">"Дизайнер отчетов"</B></FONT><FONT FACE="Arial" SIZE=2> процедуру вставки в отчет переменных из словаря данных. При этом </FONT><FONT FACE="Arial" SIZE=2 COLOR="#ff0000">для переменной [Фото] всегда следует использовать элемент "Рисунок" и формат </FONT><FONT FACE="Arial" SIZE=2 COLOR="#ff0000">JPG</FONT><FONT FACE="Arial" SIZE=2>.</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P>Макетирование и печать карточек</P>
+</FONT><I><FONT FACE="Arial"><P>Вкладка "Дизайн (макеты карточек)"</P>
+</B></I></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Изначально при входе на вкладку список существующих в системе AS101 макетов пуст. Если Вам известен пароль макетировщика, следует нажать кнопку "</FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">Доступ к настройкам</FONT><FONT FACE="Arial" SIZE=2>" и ввести пароль. Будет открыт доступ к разделу "</FONT><FONT FACE="Arial" SIZE=2 COLOR="#000080">Настройка и создание макетов</FONT><FONT FACE="Arial" SIZE=2>".</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Для удобства в системе существует макет-заготовка, которую можно загрузить в текущий макет, нажав кнопку "</FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">Загрузить из трафарета</FONT><FONT FACE="Arial" SIZE=2>". После этого следует указать название макета в строке ввода и воспользоваться кнопкой "</FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">Сохранить как новый</FONT><FONT FACE="Arial" SIZE=2>". При этом трафарет-заготовка будет сохранена в БД AS101. В списке макетов появится созданный Вами макет.</P>
+<P ALIGN="JUSTIFY">Если вы выбрали в сетке-списке какой-либо макет и отредактировали его (или только изменили наименование), следует использовать кнопку "</FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">Сохранить измененный</FONT><FONT FACE="Arial" SIZE=2>". Если Вы взяли какой-нибудь макет за основу для нового макета, то после редактирования следует пользоваться кнопкой "</FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">Сохранить как новый</FONT><FONT FACE="Arial" SIZE=2>". Без Ваших явных указаний на необходимость сохранения никаких автоматических сохранений после выхода из дизайнера макетов не проводится, чтобы предотвратить случайную "порчу" макета: все редакционные изменения хранятся лишь во временном, невидимом Вам текущем макете. Если Вы не хотите сохранять редакционные изменения, достаточно</FONT><FONT FACE="Arial" SIZE=2> </FONT><FONT FACE="Arial" SIZE=2>просто перейти в списке макетов на любой нужный Вам макет или нажать кнопку "</FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">Обновить списки</FONT><FONT FACE="Arial" SIZE=2>", находящуюся под списком макетов.</P>
+<P ALIGN="JUSTIFY">Вызов дизайнера отчетов для выбранного макета происходит при нажатии кнопки "</FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">Редактировать макет</FONT><FONT FACE="Arial" SIZE=2>". Подробности о приемах работы с дизайнером отчнтов смотрите ниже в разделе </FONT><B><FONT FACE="Arial" SIZE=2 COLOR="#008000">"Дизайнер отчетов".</B></FONT><FONT FACE="Arial" SIZE=2> Здесь лишь отметим, что при выходе из дизайнера Вам всегда предлагается сохранять макет во внешнем файле (*.frf - форма отчета дизайнера отчетов). Учитывая, что макеты сохраняются в БД AS101, необходимости в сохранении макета во внешнем файле у Вас нет. Можно отказаться от сохранения макета при выходе из дизайнера, но не забыть <U>сразу после выхода воспользоваться описанными выше кнопками</U></FONT><FONT FACE="Arial" SIZE=2> "</FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">Сохранить измененный</FONT><FONT FACE="Arial" SIZE=2>" или "</FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">Сохранить как новый</FONT><FONT FACE="Arial" SIZE=2>".</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">После того, как макет создан, можно проверить его внешний вид на данных любого клиента AS101 (а при необходимости сразу же и напечатать). Для этого необходимо сначала воспользоваться кнопкой "</FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">Обновить</FONT><FONT FACE="Arial" SIZE=2>", расположенной над фотографией клиента. </P>
+<P ALIGN="JUSTIFY">Для поиска конкретного клиента используйте кнопки "</FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">Найти</FONT><FONT FACE="Arial" SIZE=2>" и "</FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">Следующий</FONT><FONT FACE="Arial" SIZE=2>", предварительно задав колонку, в которой следует искать текст, и сам контекст поиска.</P>
+<P ALIGN="JUSTIFY">После того, как интересующий Вас клиент найден (например, клиент с аномально длинной фамилией), воспользуйтесь кнопкой</FONT><FONT FACE="Arial" SIZE=2> "</FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">Просмотр макета</FONT><FONT FACE="Arial" SIZE=2>". Будет открыто окно предварительного просмотра, в котором Вы увидите, как будет выглядеть при печати карточка клиента. Окно предварительного просмотра позволяет сразу же напечатать карточку.</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+</FONT><B><U><FONT FACE="Arial" SIZE=2 COLOR="#0000ff"><P ALIGN="JUSTIFY">ОБЩИЕ ЗАМЕЧАНИЯ ПО СОЗДАНИЮ МАКЕТОВ</P>
+</B></U></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Подробности использования дизайнера отчетов описаны ниже в разделе </FONT><B><FONT FACE="Arial" SIZE=2 COLOR="#008000">"Дизайнер отчетов"</B></FONT><FONT FACE="Arial" SIZE=2>. Здесь отметим только ряд важных для макетирования моментов.</P>
+<OL>
+
+<P ALIGN="JUSTIFY"><LI>В дизайнере отключена возможность добавления новых страниц, так как карточки могут быть или односторонние, или двухсторонние.</LI></P>
+<P ALIGN="JUSTIFY"><LI>Каждая страница (сторона) может иметь свою ориентацию: например, "тыльная" сторона карточки имеет вертикальную ориентацию (портретная), в то время как лицевая - горизонтальную (альбомная). Особенности ориентации, равно как и выбор размера бумаги (карточки) зависят от установленного у Вас принтера для печати на пластиковых карточках.</LI></P>
+<P ALIGN="JUSTIFY"><LI>В образце-заготовке на карточку добавлен элемент "Фигура" - прямоугольник со скругленными краями. Его свойство Visible (вывод при печати) установлено в False (нет). Он полезен макетировщику тем, что позволяет учесть расположение текста и фото с учетом скругленных краев карточки. Если Вам недостаточно настраиваемой сетки, Вы можете широко использовать подобные приемы, размещая на макете (и блокируя при необходимости) служебные элементы, которые видны при работе с макетом, но не выводятся на печать. Для этого достаточно свойство Visible (вывод при печати) установить в False (нет).</LI></P>
+<P ALIGN="JUSTIFY"><LI>Учитывая, что фотографии клиентов хранятся в БД AS101 в формате JPG, при добавлении рисунка следует не забыть установить свойство "BlobType" в btJPG, а свойство DataField в значение [Фото] !</LI></P>
+<P ALIGN="JUSTIFY"><LI>На макете (помимо элементов, использованных в заготовке-трафарете) могут быть размещены и другие элементы форматирования (линия, фигуры с заливками, тексты с тенью и др. С подробностями их использования можно ознакомиться в разделе </FONT><B><FONT FACE="Arial" SIZE=2 COLOR="#008000">"Дизайнер отчетов"</B></FONT><FONT FACE="Arial" SIZE=2>.</LI></P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"><LI>ОГРАНИЧЕНИЯ</B>: хотя в дизайнере отчетов и оставлен доступным ряд элементов, связанных с доступом к данных (например, </FONT><FONT FACE="Arial" SIZE=2 COLOR="#ff0000">ВСТАВКА ПОЛЕЙ БД, БЭНД (полоса), ВЛОЖЕННЫЙ ОТЧЕТ</FONT><FONT FACE="Arial" SIZE=2>)</FONT><FONT FACE="Arial" SIZE=2>, они не могут быть использованы эффективно из-за того, что сам процесс доступа к данным и управление словарем данных в целях безопасности реализован на программном уровне.</LI></P></OL>
+
+<P ALIGN="JUSTIFY">Для создания сложного оформления можно использовать заранее подготовленные рисунки или заливки, используя возможности вставки любых рисунков и заливки фигур и прямоугольников в текстом.</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><I><FONT FACE="Arial"><P>Вкладка "Печать карточек"</P>
+</B></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">ФИЛЬТРАЦИЯ СПИСКА</P>
+</I><P ALIGN="JUSTIFY">В верхней части вкладки расположена панель </FONT><FONT FACE="Arial" SIZE=2 COLOR="#008000">"Отбор клиентов"</FONT><FONT FACE="Arial" SIZE=2>, позволяющая произвести необходимую фильтрацию списка клиентов. Кнопка "</FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">Обновить списки</FONT><FONT FACE="Arial" SIZE=2>" на панели предназначена для обновления всех списков панели отбора клиентов. Можно установить все необходимые Вам условия отбора, после чего, установив предварительно флаг "</FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">Вкл. Отбор</FONT><FONT FACE="Arial" SIZE=2>" нажать кнопку "</FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">Обновить</FONT><FONT FACE="Arial" SIZE=2>". Будет сформирован отфильтрованный список клиентов AS101. </P>
+<P ALIGN="JUSTIFY">При любых изменениях условий фильтрации списка не забывайте обновлять список (кнопка "</FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">Обновить</FONT><FONT FACE="Arial" SIZE=2>").</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Если Вы не хотите применять никаких условий фильтрации списка, достаточно снять флаг "</FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">Вкл. Отбор</FONT><FONT FACE="Arial" SIZE=2>".</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><I><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">ПОИСК КЛИЕНТА</P>
+</I><P ALIGN="JUSTIFY">Для поиска какого-либо определенного клиента в списке используйте кнопки "</FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">Найти</FONT><FONT FACE="Arial" SIZE=2>" и "</FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">Следующий</FONT><FONT FACE="Arial" SIZE=2>", предварительно задав колонку, в которой следует искать текст, и сам контекст поиска.</P>
+<P ALIGN="JUSTIFY">В сетке-списке клиентов можно изменять ширину колонок и менять порядок колонок местами.</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+</FONT><I><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">НАЗНАЧЕНИЕ МАКЕТА КЛИЕНТУ</P>
+</I><P ALIGN="JUSTIFY">Под сеткой клиентов расположена панель </FONT><FONT FACE="Arial" SIZE=2 COLOR="#000080">"Назначение макета клиенту"</FONT><FONT FACE="Arial" SIZE=2>. В этой панели для выбранного Вами клиента следует указать назначаемый ему макет карточки и нажать кнопку "</FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">Сохранить</FONT><FONT FACE="Arial" SIZE=2>". При необходимости изменения макета или отметки о выдаче пропуска также используйте кнопку "</FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">Сохранить</FONT><FONT FACE="Arial" SIZE=2>".</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">ПРОСМОТР</P>
+<P ALIGN="JUSTIFY">Нажав кнопку "</FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">Просмотр</FONT><FONT FACE="Arial" SIZE=2>", Вы открываете окно предварительного просмотра карточки клиента (при условии, что ему уже назначен макет!). Можно выбрать принтер и напечатать карточку клиента.</P>
+<P ALIGN="JUSTIFY">Кнопка "</FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">Просмотр</FONT><FONT FACE="Arial" SIZE=2>" на вкладке </FONT><FONT FACE="Arial" SIZE=2 COLOR="#008000">"Печать карточек"</FONT><FONT FACE="Arial" SIZE=2> предоставляет возможность коррекции внешнего вида карточки. Например, если у клиента фамилия не умещается в поле, отведенное макетом, у Вас есть возможность вызвать дизайнер по правой кнопке мыши. Учтите, что <U>при этом Вы будете редактировать не макет, а макет с конкретными данными</U>. Таким образом можно изменить вид карточки для конкретного клиента (например, изменить размеры полей или поменять шрифт), не внося никаких изменений в макет (после печати карточки внесенные Вами изменения никак не отразятся на исходном макете, но позволят напечатать хорошо оформленную карточку клиента).</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">ПЕЧАТЬ КАРТОЧЕК С НАЗНАЧЕННЫМИ МАКЕТАМИ</P>
+<B><P ALIGN="JUSTIFY">Внимание!</B> Печать производится непосредственно на принтер, <U>минуя окно предварительного просмотра</U>, в связи с чем при использовании этой панели следует проконтролировать, <U>какой принтер в системе установлен "по-умолчанию"</U>. Показ окна предварительного просмотра невозможен из-за того, что карточка каждого клиента будет печататься с тем макетом, который назначен ему индивидуально! Имейте в виду, что </FONT><FONT FACE="Arial" SIZE=2 COLOR="#ff0000">если клиенту не назначен макет, то его карточка просто пропускается</FONT><FONT FACE="Arial" SIZE=2>.</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Если необходимо, можно напечатать одного или несколько выбранных клиентов. Выбор производится левой кнопкой мыши, удерживая нажатой клавишу CTRL на клавиатуре, при этом все выбранные клиенты помечаются точкой. После этого следует нажать кнопку "</FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">Только выделенных</FONT><FONT FACE="Arial" SIZE=2>".</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Если вы использовали фильтр для клиентов, можно напечатать карточки для всего списка, нажав кнопку "</FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">Весь список</FONT><FONT FACE="Arial" SIZE=2>".</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">ПРОСМОТР И ПЕЧАТЬ КАРТОЧЕК ПО ПРОИЗВОЛЬНОМУ МАКЕТУ</P>
+<P ALIGN="JUSTIFY">Если необходимо, можно предварительно "отфильтровать" список клиентов, после чего выбрать макет и нажать кнопку "</FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">Весь список</FONT><FONT FACE="Arial" SIZE=2>" панели </FONT><FONT FACE="Arial" SIZE=2 COLOR="#000080">"Просмотр и печать списка карточек по произвольному макету"</FONT><FONT FACE="Arial" SIZE=2 COLOR="#008000">.</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Открывается окно предварительного просмотра, в котором можно увидеть все страницы для печати. Это позволяет не только проконтролировать вид карточек перед печатью во избежание неоправданной порчи пластиковых карт, но и <U>провести выборочную печать</U>. Номера страниц всегда можно увидеть в окне предварительного просмотра, щелкнув мышью по нужной странице.</P>
+<P ALIGN="JUSTIFY">Например, макет был двусторонний, в списке отбора - 10 клиентов. На предварительном просмотре Вы увидите 20 страниц (1,2 стр. - первый клиент, 3,4 стр. - второй и т.д.). Вы можете напечатать карточки только для 4-го и 5-го клиентов, указав при печати страницы 7-10.</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P><A NAME="_Toc486332912"><A NAME="_Toc486333391"><A NAME="_Toc31092990">Элементы </A></A></A>для оформления макета</P>
+</B></FONT><FONT FACE="Arial" SIZE=2>
+<P><IMG SRC="Image1.gif" WIDTH=303 HEIGHT=48></P>
+
+<P>&nbsp;</P></FONT>
+<TABLE BORDER CELLSPACING=2 CELLPADDING=7 WIDTH=666>
+<TR><TD WIDTH="11%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Иконка</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"></B></FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Название</B></FONT></TD>
+<TD WIDTH="73%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Описание</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="11%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image357.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Текст</FONT></TD>
+<TD WIDTH="73%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Предназначен для отображения текста (однострочного или многострочного). В тексте могут присутствовать переменные (обрамляются квадратными скобками), выражения или поля БД (также обрамляются квадратными скобками)</FONT></TD>
+</TR>
+<TR><TD WIDTH="11%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image358.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Бэнд</FONT></TD>
+<TD WIDTH="73%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Бэнд (англ. band - полоска). Как и во всех band-ориентированных генераторах отчетов, позволяет объединять объекты в группы (заголовок отчета, страницы, многострочная часть, подвал и пр.).</P>
+</FONT><B><FONT FACE="Arial" SIZE=1><P>ПРИМ</B></FONT><FONT FACE="Arial" SIZE=2>. </FONT><FONT FACE="Arial" SIZE=1>Из-за отключенного доступа к данным практически не применим, за исключением вывода информации на растягиваемых полосах.</FONT></TD>
+</TR>
+<TR><TD WIDTH="11%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image359.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Рисунок</FONT></TD>
+<TD WIDTH="73%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Предназначен для отображения рисунка в форматах </FONT><B><FONT FACE="Arial" SIZE=2 COLOR="#ff0000">JPG, </B></FONT><FONT FACE="Arial" SIZE=2>BMP, ICO, WMF, EMF. Также способен отображать рисунок из BLOb-поля БД.</P>
+</FONT><B><FONT FACE="Arial" SIZE=1><P>ПРИМ</B></FONT><FONT FACE="Arial" SIZE=2>. </FONT><FONT FACE="Arial" SIZE=1 COLOR="#ff0000">Поле (переменная) [<B>Фото</B>] должна иметь тип btJPG </FONT></TD>
+</TR>
+<TR><TD WIDTH="11%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image360.gif" WIDTH=22 HEIGHT=22></FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Вложенный отчет</FONT></TD>
+<TD WIDTH="73%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Предназначен для создания вложенных отчетов. Будучи вставленным в отчет, приводит к созданию новой страницы, содержимое которой будет выведено вместо объекта при формировании отчета.</P>
+</FONT><B><FONT FACE="Arial" SIZE=1><P>ПРИМ</B></FONT><FONT FACE="Arial" SIZE=2>. </FONT><FONT FACE="Arial" SIZE=1>Из-за отключенного доступа к данным практически не применим.</FONT></TD>
+</TR>
+<TR><TD WIDTH="11%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image361.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Линия</FONT></TD>
+<TD WIDTH="73%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>При выборе этого объекта курсор принимает форму карандаша. На странице отчета при этом можно рисовать вертикальные и горизонтальные линии.</FONT></TD>
+</TR>
+<TR><TD WIDTH="11%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image362.gif" WIDTH=22 HEIGHT=22></FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Текст с тенью</FONT></TD>
+<TD WIDTH="73%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Выполняет те же функции, что и объект "Текст". Кроме того, умеет отображать тень или градиентную заливку. Очень удобный объект для печати наклеек.</FONT></TD>
+</TR>
+<TR><TD WIDTH="11%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image363.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Штрих-код</FONT></TD>
+<TD WIDTH="73%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Отображает данные в форме штрих-кода. Способен отображать данные из поля БД.</P>
+</FONT><B><FONT FACE="Arial" SIZE=1><P>ПРИМ</B></FONT><FONT FACE="Arial" SIZE=2>. </FONT><FONT FACE="Arial" SIZE=1>Из-за отключенного доступа к данным практически не применим.</FONT></TD>
+</TR>
+<TR><TD WIDTH="11%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image364.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Фигура</FONT></TD>
+<TD WIDTH="73%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Отображает один из четырех типов фигур: прямоугольник, прямоугольник с закругленными углами, эллипс и треугольник.</FONT></TD>
+</TR>
+<TR><TD WIDTH="11%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image365.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Флажок</FONT></TD>
+<TD WIDTH="73%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Отображает крестик или галочку внутри прямоугольника.</FONT></TD>
+</TR>
+<TR><TD WIDTH="11%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image366.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">RichText</FONT></TD>
+<TD WIDTH="73%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Отображает форматированный текст (формат RTF). В тексте могут присутствовать переменные/выражения/поля БД. Также способен отображать данные из BLOb-поля БД.</FONT></TD>
+</TR>
+<TR><TD WIDTH="11%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image367.gif" WIDTH=22 HEIGHT=23></FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">OLE объект</FONT></TD>
+<TD WIDTH="73%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Отображает объект OLE. Также способен отображать данные из BLOb-поля БД.</FONT></TD>
+</TR>
+<TR><TD WIDTH="11%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image368.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Диаграмма</FONT></TD>
+<TD WIDTH="73%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Отображает данные в виде диаграммы. </P>
+</FONT><B><FONT FACE="Arial" SIZE=1><P>ПРИМ</B></FONT><FONT FACE="Arial" SIZE=2>. </FONT><FONT FACE="Arial" SIZE=1>Из-за отключенного доступа к данным практически не применим.</FONT></TD>
+</TR>
+<TR><TD WIDTH="11%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image369.gif" WIDTH=22 HEIGHT=22></FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">RichText 2.0</FONT></TD>
+<TD WIDTH="73%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Отображает форматированный текст с картинками и OLE-вставками (формат RTF 2.0, используется компонент TrxRichEdit). В тексте могут присутствовать переменные/выражения/поля БД. Также способен отображать данные из BLOb-поля БД.</FONT></TD>
+</TR>
+</TABLE>
+
+<B><I><FONT FACE="Arial"><P><A NAME="_Toc452349848"><A NAME="_Toc465423687"></FONT><A NAME="_Toc486331185"><A NAME="_Toc486331738"><A NAME="_Toc486332913"><A NAME="_Toc486333392"><A NAME="_Toc31092991"><IMG SRC="Image357.gif" WIDTH=22 HEIGHT=22>  <FONT FACE="Arial">Объект “Текст”</A></A></A></A></A></A></A></P>
+</B></I></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Представляет собой произвольным образом обрамленный прямоугольник <U>с многострочным  текстом внутри</U></FONT><FONT FACE="Arial" SIZE=2>.</FONT><FONT FACE="Arial" SIZE=2> Задается цвет текста/заливка, тип рамки, толщина  рамки и цвет, все параметры шрифта текста, выравнивание текста внутри прямоугольника и ориентация текста (норм./90 градусов). Для этого предназначены <U>панели инструментов "Текст" и "Прямоугольник"</U></FONT><FONT FACE="Arial" SIZE=2>:</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image15.gif" WIDTH=549 HEIGHT=48></P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image16.gif" WIDTH=268 HEIGHT=48></P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">В  мемо объекта можно поместить многострочный текст с переменными. Переменные обрамляются квадратными скобками. </FONT><U><FONT FACE="Arial" SIZE=2 COLOR="#000080">При формировании отчета, когда в объекте обнаруживается переменная, вызывается событие, которому передается имя переменной (это может быть и не имя, а выражение) и ожидается возврат ее значения</U>. Примеры использования переменных:</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Длина, см: [Длина] – текст (Длина, см:) и переменная ([Длина])</P>
+<P ALIGN="JUSTIFY">Длина, см: [[Длина в дюймах] * 2.54] – текст и выражение с переменной</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Редактор объекта позволяет редактировать содержимое мемо, быстро вставлять переменные, выражения, а также редактировать скрипт. Для более удобной работы можно воспользоваться быстрыми клавишами: Insert - вставка переменной; клавиша Ctrl+Enter - аналог кнопки OK.</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image17.gif" WIDTH=267 HEIGHT=273></P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Кнопки на панели инструментов выполняют следующие функции:</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"><IMG SRC="Image370.gif" WIDTH=22 HEIGHT=22></FONT><FONT FACE="Arial" SIZE=2> вызывает конструктор выражений (см. далее);</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"><IMG SRC="Image371.gif" WIDTH=22 HEIGHT=22></FONT><FONT FACE="Arial" SIZE=2> вызывает диалог вставки поля БД в текст (см. далее);</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"><IMG SRC="Image372.gif" WIDTH=68 HEIGHT=22></FONT><FONT FACE="Arial" SIZE=2> операции с буфером обмена;</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"><IMG SRC="Image373.gif" WIDTH=22 HEIGHT=22></FONT><FONT FACE="Arial" SIZE=2> включает или выключает перенос слов в длинных строках;</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"><IMG SRC="Image374.gif" WIDTH=22 HEIGHT=22></FONT><FONT FACE="Arial" SIZE=2> включает или выключает окно со скриптом;</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"><IMG SRC="Image375.gif" WIDTH=22 HEIGHT=22></FONT><FONT FACE="Arial" SIZE=2> кнопка "Отмена";</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"><IMG SRC="Image376.gif" WIDTH=22 HEIGHT=22></FONT><FONT FACE="Arial" SIZE=2> кнопка "ОК".</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Помимо основного редактора, имеется редактор, позволяющий выбрать формат отображения имеющихся в тексте переменных. Вызвать его можно либо из контекстного меню объекта, либо из инспектора объектов (свойство DisplayFormat). </P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image25.gif" WIDTH=281 HEIGHT=242></P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=2 COLOR="#000080"><P ALIGN="JUSTIFY"><A NAME="Note_Format"></A>Переменная может отображаться как текст, число, дата, время, булевское значение (список в левой части окна). Для каждого из этих типов (кроме текстового представления) можно выбрать один из нескольких способов форматирования (список в правой части окна), </FONT><FONT FACE="Arial" SIZE=2>например, для числа можно задать количество знаков после запятой, знак-разделитель целой и дробной части, разделение на разряды. </P>
+<P ALIGN="JUSTIFY">Кроме того, для каждого типа может быть выбран произвольный формат, когда строка форматирования задается вручную (например, #,###,##0.000 для числа). Для этого необходимо в списке справа выбрать тип форматирования "Другой". Строки форматирования для каждого из типов описаны в справочной системе Delphi, раздел formatting strings (кроме булевского типа, где строка представлена в формате Значение1;Значение2). Если выбран текстовый тип (по умолчанию), то форматирование производиться не будет.</P>
+<P ALIGN="JUSTIFY">Указанные опции форматирования будут воздействовать на все переменные, содержащиеся  в объекте. Если переменная не может быть отформатирована указанным способом, она выводится как текст. </P>
+<U><P ALIGN="JUSTIFY">Для того, чтобы отобразить объект другим шрифтом или цветом в зависимости от выполнения какого-либо условия, можно воспользоваться диалогом "Условное выделение". </U>Диалог можно вызвать с помощью кнопки </FONT><FONT FACE="Arial" SIZE=2><IMG SRC="Image377.gif" WIDTH=22 HEIGHT=22></FONT><FONT FACE="Arial" SIZE=2> на панели инструментов "Текст".</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image27.gif" WIDTH=235 HEIGHT=277></P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">К примеру, нужно выделить суммы заказов, превышающие 1000$ жирным шрифтом. Для этого в объекте, содержащем сумму заказа, в диалоге указывается условие&nbsp;– Value &gt; 1000 и задаются параметры шрифта. Условие выделения можно указать и по-другому&nbsp;– [Part total] &gt; 1000. Другой пример использования выделения&nbsp;– для придания отчету презентабельного вида можно сделать чередующуюся раскраску строк данных. Для этого на бэнд надо поместить объект "Текст", растянуть его по ширине секции, в диалоге выделения набрать условие [LINE#]&nbsp;mod&nbsp;2&nbsp;=&nbsp;0 и указать цвет фона (к примеру, серый).</P>
+<U><P>В контекстном меню объекта можно задать следующие опции:</P>
+
+<UL>
+</U><P ALIGN="JUSTIFY"><LI>"растягиваемый" (</FONT><B><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">Stretched</B></FONT><FONT FACE="Arial" SIZE=2>) - высота объекта будет зависеть от количества строк в нем. При этом опция "растягиваемый" должна быть включена у бэнда, на котором находится объект. При печати бэнда вычисляется его высота, и все объекты с включенным растягиванием выводятся таким образом, что их нижняя граница растягивается до нижней границы бэнда.</LI></P>
+<P ALIGN="JUSTIFY"><LI>"перенос слов" (</FONT><B><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">WordWrap</B></FONT><FONT FACE="Arial" SIZE=2>) - если слово не помещается в строке, оно переносится на следующую строку.</LI></P>
+<P ALIGN="JUSTIFY"><LI>"перенос по слогам" (WordBreak) - при переносе слова делается разбивка его на слоги. При этом опция "перенос слов" должна быть включена.</LI></P>
+<P ALIGN="JUSTIFY"><LI>"только текст" (</FONT><B><U><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">TextOnly</B></U></FONT><FONT FACE="Arial" SIZE=2>) - содержимое объекта трактуется как текст, </FONT><B><U><FONT FACE="Arial" SIZE=2 COLOR="#ff0000">переменные и выражения не обрабатываются</U></FONT><FONT FACE="Arial" SIZE=2 COLOR="#ff0000">. </FONT><FONT FACE="Arial" SIZE=2>Прим.: учитывая связь с данными через переменные, следует использовать только для самостоятельно создаваемых надписей.</LI></P>
+</B><P ALIGN="JUSTIFY"><LI>"скрывать повторяющиеся" (</FONT><B><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">Suppress</B></FONT><FONT FACE="Arial" SIZE=2>) - не выводить объекты с повторяющимися значениями.</LI></P>
+<P ALIGN="JUSTIFY"><LI>"автоширина" (</FONT><B><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">AutoWidth</B></FONT><FONT FACE="Arial" SIZE=2>) - при печати рамка растягивается по ширине объекта.</LI></P></UL>
+
+<P>Кроме того, в инспекторе объектов можно задать следующие значения:</P>
+
+<UL>
+</FONT><B><FONT FACE="Arial" SIZE=2 COLOR="#0000ff"><LI>CharSpacing</B></FONT><FONT FACE="Arial" SIZE=2> - расстояние между буквами;</LI>
+</FONT><B><FONT FACE="Arial" SIZE=2 COLOR="#0000ff"><LI>GapX, GapY</B></FONT><FONT FACE="Arial" SIZE=2> - отступы текста слева и сверху;</LI>
+</FONT><B><FONT FACE="Arial" SIZE=2 COLOR="#0000ff"><LI>LineSpacing </B></FONT><FONT FACE="Arial" SIZE=2>- расстояние между строками текста.</LI></UL>
+
+</FONT><B><I><FONT FACE="Arial"><P><A NAME="_Toc452349849"><A NAME="_Toc465423688"><A NAME="_Toc452349850"><A NAME="_Toc465423689"><A NAME="_Toc486331187"><A NAME="_Toc486331740"><A NAME="_Toc486332915"><A NAME="_Toc486333394"><A NAME="_Toc31092993"><IMG SRC="Image359.gif" WIDTH=22 HEIGHT=22></FONT><FONT FACE="Arial">  Объект “Рисунок”</A></A></A></A></A></A></A></P>
+</B></I></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Предназначен для вставки графического файла в формате </FONT><B><FONT FACE="Arial" SIZE=2 COLOR="#ff0000">JPG/</B></FONT><FONT FACE="Arial" SIZE=2>BMP/WMF/ICO в документ. Редактор объекта позволяет вставить рисунок и очистить содержимое объекта. </P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image28.gif" WIDTH=341 HEIGHT=306></P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Рисунок может быть вставлен из переменной или поля таблицы БД, если в мемо объекта поместить ссылку на соответствующее поле, например: [Фото]. Редактор мемо может быть вызван с помощью инспектора объектов либо комбинацией клавиш Ctrl+Enter. Эту опреацию можно также выполнить из инспектора объектов (</FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">свойство DataField</FONT><FONT FACE="Arial" SIZE=2>).</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">В контекстном меню объекта и в инспекторе можно задать следующие опции:</P>
+
+<UL>
+<P ALIGN="JUSTIFY"><LI>"растягиваемый" (Stretched) - рисунок растягивается по границам объекта;</LI></P>
+<P ALIGN="JUSTIFY"><LI>"сохранять пропорции" (KeepAspect) - если включено растягивание, пропорции рисунка сохраняются;</LI></P>
+<P ALIGN="JUSTIFY"><LI>"центровка" (Center) - рисунок выводится в центре объекта.</LI></P>
+</FONT><B><FONT FACE="Arial" SIZE=2 COLOR="#ff0000"><P ALIGN="JUSTIFY"><LI>BlobType</FONT><FONT FACE="Arial" SIZE=2 COLOR="#000080"> </B>- </FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">если рисунок хранится в поле таблицы БД, эта опция позволяет выбрать тип хранимого рисунка: BMP, WMF, ICO или </FONT><B><FONT FACE="Arial" SIZE=2 COLOR="#ff0000">JPG</B></FONT><FONT FACE="Arial" SIZE=2 COLOR="#000080">. (</FONT><FONT FACE="Arial" SIZE=2 COLOR="#ff0000">ПРИМ. Для AS101 – только JPG</FONT><FONT FACE="Arial" SIZE=2 COLOR="#000080">).</LI></P></UL>
+
+</FONT><B><I><FONT FACE="Arial"><P><A NAME="_Toc452349852"><A NAME="_Toc465423691"></FONT><A NAME="_Toc486331189"><A NAME="_Toc486331742"><A NAME="_Toc486332917"><A NAME="_Toc486333396"><A NAME="_Toc31092995"><IMG SRC="Image361.gif" WIDTH=22 HEIGHT=22>  <FONT FACE="Arial">Объект “Линия”</A></A></A></A></A></A></A></P>
+</B></I></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Представляет собой вертикальную либо горизонтальную линию с изменяемым цветом и толщиной. Дизайнер имеет удобные средства для рисования линий. В частности, с помощью линий можно быстро задать внешнее обрамление для таблицы, отличное от внутреннего. </P>
+<P ALIGN="JUSTIFY">Для рисования линии выберите инструмент "Линия" на панели объектов. При этом курсор мыши примет форму карандаша при перемещении его над поверхностью листа. Установите курсор мыши в место начала линии, нажмите левую кнопку мыши и двигайте мышь до нужной позиции. После отпускания кнопки будет нарисована линия. После окончания рисования нужно нажать кнопку "выбор объекта" либо Esc.</P>
+</FONT><B><I><FONT FACE="Arial"><P><A NAME="_Toc452349854"><A NAME="_Toc465423693"><A NAME="_Toc465423696"></FONT><A NAME="_Toc486331194"><A NAME="_Toc486331747"><A NAME="_Toc486332922"><A NAME="_Toc486333401"><A NAME="_Toc31093003"><IMG SRC="Image364.gif" WIDTH=22 HEIGHT=22>  <FONT FACE="Arial">Объект “Фигура”</A></A></A></A></A></A></P>
+</B></I></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Предназначен для вставки геометрических фигур (прямоугольник, прямоугольник с закругленными углами, эллипс, треугольник) в документ. Тип фигуры можно установить в инспекторе объектов (свойство Shape).</P>
+</FONT><B><I><FONT FACE="Arial"><P><A NAME="_Toc465423697"></FONT><A NAME="_Toc486331192"><A NAME="_Toc486331745"><A NAME="_Toc486332920"><A NAME="_Toc486333399"><A NAME="_Toc31092998"><IMG SRC="Image367.gif" WIDTH=22 HEIGHT=23>  <FONT FACE="Arial">Объект “OLE”</A></A></A></A></A></P>
+</B></I></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Предназначен для вставки OLE объектов в документ. Редактор объекта “OLE” позволяет вставить новый объект и редактировать существующий. </P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image29.gif" WIDTH=431 HEIGHT=294></P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Вставка нового объекта производится в стандартном диалоговом окне. OLE объект может быть вставлен из поля таблицы БД, если в мемо объекта поместить ссылку на соответствующее поле. Редактор мемо может быть вызван с помощью инспектора объектов либо комбинацией клавиш Ctrl + Enter. Эту операцию можно также выполнить из инспектора объектов (свойство DataField).</P>
+<P ALIGN="JUSTIFY">В контекстном меню объекта опция "растягиваемый" (Stretched) позволяет корректно отображать данные в некоторых случаях (например, при вставке объекта "Лист Excel").</P>
+</FONT><B><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">Прим</B>.: в числе вынесенных в словарь переменных (представляющих сведения о клиентах AS101) OLE-поля не используются, поэтому возможна только вставка ссылок на какие-нибудь используемые Вами OLE-объекты.</P>
+</FONT><B><I><P><A NAME="_Toc486331191"><A NAME="_Toc486331744"><A NAME="_Toc486332919"><A NAME="_Toc486333398"><A NAME="_Toc31092997"><IMG SRC="Image366.gif" WIDTH=22 HEIGHT=22>  <FONT FACE="Arial">Объект “RichText”</A></A></A></A></A></P>
+</B></I></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Предназначен для вставки текста в формате RTF (Rich Text format) в документ. В частности, таким образом можно вставить текст, подготовленный в текстовом процессоре MS Word, предварительно сохранив его в формате RTF. </P>
+<P ALIGN="JUSTIFY">Редактор объекта позволяет выполнять все базовые операции над текстом - менять шрифт, выравнивание, создавать маркированные списки.</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image30.gif" WIDTH=578 HEIGHT=300></P>
+</FONT><B><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">Прим</B>.: в числе вынесенных в словарь переменных (представляющих сведения о клиентах AS101) RTF-поля не используются, поэтому возможна только вставка ссылок на какие-нибудь используемые Вами RTF-объекты.</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">В тексте могут находиться переменные, обрамленные квадратными скобками - как и в объекте “Текст”. RichText объект может быть вставлен из поля таблицы БД </FONT><FONT FACE="Arial" SIZE=2 COLOR="#ff0000">(доступ отключен!!!)</FONT><FONT FACE="Arial" SIZE=2>, если в мемо объекта (не в сам объект!) поместить ссылку на соответствующее поле. Редактор мемо может быть вызван с помощью инспектора объектов либо комбинацией клавиш Ctrl + Enter. Эту операцию можно также выполнить из инспектора объектов (свойство DataField).</P>
+</FONT><B><I><FONT FACE="Arial"><P><A NAME="_Toc452349855"><A NAME="_Toc465423694"><A NAME="_Toc486331196"><A NAME="_Toc486331749"><A NAME="_Toc486332924"><A NAME="_Toc486333403"><A NAME="_Toc31093005"><IMG SRC="Image369.gif" WIDTH=22 HEIGHT=22></FONT><FONT FACE="Arial"> Объект RichText 2.0</A></A></A></A></A></P>
+</B></I></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">&#9;Объект аналогичен объекту RichText, за исключением того, что он базируется на компоненте RXRichEdit, который поддерживает формат RTF 2.0 (RichText с OLE-вставками и картинками). </P>
+</FONT><B><I><FONT FACE="Arial"><P></A></A></FONT><A NAME="_Toc486331195"><A NAME="_Toc486331748"><A NAME="_Toc486332923"><A NAME="_Toc486333402"><A NAME="_Toc31093004"><IMG SRC="Image363.gif" WIDTH=22 HEIGHT=22>  <FONT FACE="Arial">Объект “Штрихкод”</A></A></A></A></A></A></P>
+</B></I></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Предназначен для вставки штрихкодов в документ. Можно использовать следующие типы штрихкодов: </P>
+
+<UL>
+</FONT><FONT FACE="Arial" SIZE=2><LI>2 of 5 interleaved</LI>
+<LI>Code39</LI>
+<LI>Code39 Extended</LI>
+<LI>Code128A-C</LI>
+<LI>Code93</LI>
+<LI>Code93 Extended</LI>
+<LI>MSI</LI>
+<LI>PostNet</LI>
+<LI>Codebar</LI>
+<LI>EAN8</LI>
+<LI>EAN13</LI>
+<LI>EAN128A-C</LI>
+<LI>UPC A, E0, E1, Supp2, Supp5</LI></UL>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image31.gif" WIDTH=274 HEIGHT=271></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P><A NAME="_Toc486332942"><A NAME="_Toc486333421"><A NAME="_Toc31093023"></A></A></A></A>Дизайнер</A></A></A> отчетов</P>
+</B></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Дизайнер предоставляет пользователю удобные средства для разработки внешнего вида отчета и позволяет сразу выполнить предварительный просмотр. Интерфейс дизайнера выполнен на современном уровне с использованием панелей инструментов (toolbars), расположение которых можно изменять по своему вкусу. Информация о расположении панелей запоминается в реестре, и при следующем запуске восстанавливается. Также в реестре запоминаются остальные настройки дизайнера.</P>
+</FONT><B><FONT FACE="Arial" SIZE=2 COLOR="#000080"><P ALIGN="JUSTIFY">Использование дизайнера дает возможность пользователю настраивать вид отчета</B></FONT><FONT FACE="Arial" SIZE=2 COLOR="#000080">, </FONT><B><FONT FACE="Arial" SIZE=2 COLOR="#000080">а также редактировать готовый отчет</B></FONT><FONT FACE="Arial" SIZE=2 COLOR="#000080">.</P>
+</FONT><FONT FACE="Arial" SIZE=2>
+<P><IMG SRC="Image32.gif" WIDTH=639 HEIGHT=464></P>
+</FONT><B><I><FONT FACE="Arial"><P><A NAME="_Toc465423699"><A NAME="_Toc486331213"><A NAME="_Toc486331766"><A NAME="_Toc486332945"><A NAME="_Toc486333423"><A NAME="_Toc31093025">Клавиши управления</A></A></A></A></A></A></P>
+
+<UL>
+</B></I></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"><LI>Стрелки - перемещение по объектам.</LI></P>
+<P ALIGN="JUSTIFY"><LI>Ctrl + Стрелки - плавное перемещение выделенного объекта (объектов).</LI></P>
+<P ALIGN="JUSTIFY"><LI>Shift + Стрелки - уменьшение/увеличение размеров объекта.</LI></P>
+<P ALIGN="JUSTIFY"><LI>Alt + Стрелки - склеивание объекта с ближайшим в выбранном направлении.</LI></P>
+<P ALIGN="JUSTIFY"><LI>Enter - вызов редактора объекта.</LI></P>
+<P ALIGN="JUSTIFY"><LI>Delete - удаление объекта.</LI></P>
+<P ALIGN="JUSTIFY"><LI>Insert - показывает диалог вставки поля БД в отчет;</LI></P>
+<P ALIGN="JUSTIFY"><LI>Ctrl + Enter - вызов редактора мемо.</LI></P>
+<P ALIGN="JUSTIFY"><LI>Ctrl + 1..9 - установка толщины рамки объекта.</LI></P>
+<P ALIGN="JUSTIFY"><LI>Ctrl + Z - отменить последнее действие. Число уровней отката - до 100.</LI></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"><LI>Ctrl</FONT><FONT FACE="Arial" SIZE=2> + Y - повторить отмененное действие.</LI></P>
+<P ALIGN="JUSTIFY"><LI>Ctrl + G - показать сетку.</LI></P>
+<P ALIGN="JUSTIFY"><LI>Ctrl + B, Ctrl + I, Ctrl + U - управление стилем шрифта - аналоги кнопок <B>Ж, К, Ч</B> на панели текста.</LI></P>
+<P ALIGN="JUSTIFY"><LI>Ctrl + F - обрамить выделенный объект (объекты).</LI></P>
+<P ALIGN="JUSTIFY"><LI>Ctrl + D - снять обрамление с объекта.</LI></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"><LI>Ctrl</FONT><FONT FACE="Arial" SIZE=2> + X - вырезать в буфер.</LI></P>
+<P ALIGN="JUSTIFY"><LI>Ctrl + V - вставить из буфера.</LI></P>
+<P ALIGN="JUSTIFY"><LI>Ctrl + C - копировать в буфер.</LI></P>
+<P ALIGN="JUSTIFY"><LI>Ctrl + A - выделить все объекты на листе.</LI></P>
+<P ALIGN="JUSTIFY"><LI>Ctrl + N - новый отчет.</LI></P>
+<P ALIGN="JUSTIFY"><LI>Ctrl + O - открыть файл с отчетом.</LI></P>
+<P ALIGN="JUSTIFY"><LI>Ctrl + S - сохранить отчет в файле.</LI></P>
+<P ALIGN="JUSTIFY"><LI>Ctrl + P - предварительный просмотр отчета.</LI></P></UL>
+
+</FONT><FONT FACE="Arial" SIZE=2>
+<P>&nbsp;</P>
+</FONT><B><I><FONT FACE="Arial"><P><A NAME="_Toc465423700"><A NAME="_Toc486331214"><A NAME="_Toc486331767"><A NAME="_Toc486332946"><A NAME="_Toc486333424"><A NAME="_Toc31093026">Управление мышью</A></A></A></A></A></A></P>
+
+<UL>
+</B></I></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"><LI>Левая кнопка - выбор объекта; вставка нового объекта; перемещение и изменение размеров объекта (объектов).</LI></P>
+<P ALIGN="JUSTIFY"><LI>Правая кнопка - контекстное меню объекта (объектов), над которым находится указатель мыши.</LI></P>
+<P ALIGN="JUSTIFY"><LI>Двойной щелчок левой кнопкой - вызов редактора объекта. Если двойной щелчок сделать на пустом месте листа, то вызывается диалоговое окно “Параметры страницы”.</LI></P>
+<P ALIGN="JUSTIFY"><LI>Shift + левая кнопка - если объект уже выделен, то снимает с него выделение, иначе объект выделяется. Выделение остальных объектов не изменяется.</LI></P>
+<P ALIGN="JUSTIFY"><LI>Ctrl + левая кнопка - при нажатии и перемещении мыши рисуется рамка; после отпускания кнопки мыши выделяются все объекты, попавшие в рамку. Такого же эффекта можно добиться, если щелкнуть левой кнопкой мыши на пустом месте листа, и, не отпуская кнопки, потянуть мышь до нужной позиции.</LI></P>
+<P ALIGN="JUSTIFY"><LI>При перемещении бэнда его объекты перемещаются вместе с ним. Если это нежелательно, то перемещение следует выполнять при нажатой клавише Alt.</LI></P>
+<P ALIGN="JUSTIFY"><LI>Изменить масштаб выделенных объектов можно, потянув мышкой за красный квадратик на нижнем правом углу группы выделенных объектов.</LI></P>
+<P ALIGN="JUSTIFY"><LI>При приближении указателя мыши к границе двух соседних объектов вид указателя изменяется. Если при этом нажать левую кнопку и переместить указатель мыши, граница объектов также перемещается (горизонтальный сплиттинг).</LI></P></UL>
+
+</FONT><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><B><I><FONT FACE="Arial"><P><A NAME="_Toc486331217"><A NAME="_Toc486331769"><A NAME="_Toc486332948"><A NAME="_Toc486333426"><A NAME="_Toc31093028"><A NAME="_Toc486331215"><A NAME="_Toc486331768"><A NAME="_Toc486332947"><A NAME="_Toc486333425"><A NAME="_Toc31093027">Параметры отчета</A></A></A></A></A></P>
+</B></I></FONT><FONT FACE="Arial" SIZE=2><P>&#9;Окно с параметрами отчета доступно из меню "Файл|Параметры отчета...".</P>
+</FONT><FONT FACE="Arial" SIZE=2>
+<P><A NAME="_Toc486331216"><IMG SRC="Image33.gif" WIDTH=219 HEIGHT=263></A></P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">&#9;В списке принтеров имеется "Виртуальный принтер". Он необходим в случае, если в системе нет установленных принтеров. При этом дизайнер и предварительный просмотр отчета функционируют нормально. Вы можете выбрать любой из форматов бумаги, поддерживаемой Windows и Вашим принтером (вплоть до формата A2), устанавливать ориентацию листа бумаги. Т.е. "виртуальный" принтер эмулирует функции</FONT><FONT FACE="Arial" SIZE=2> </FONT><FONT FACE="Arial" SIZE=2>реального принтера (разумеется, на нем нельзя печатать;)</P>
+<P ALIGN="JUSTIFY">&#9;Другой случай, когда необходимо использовать виртуальный принтер - Вы разрабатываете форму отчета для принтера с форматом бумаги А3, а самого принтера у Вас нет (он есть у заказчика). В этом случае выбор виртуального принтера снимает проблему.</P>
+<P ALIGN="JUSTIFY">&#9;Флажок "</FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">Выбирать при открытии отчета</FONT><FONT FACE="Arial" SIZE=2>" </FONT><B><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">позволяет привязать отчет к одному из принтеров, установленных в системе. </B></FONT><FONT FACE="Arial" SIZE=2>Это значит, что при открытии такого отчета принтером по умолчанию станет выбранный принтер. Это полезно в случае, если в системе имеется несколько разных принтеров - текстовые документы можно привязать к монохромному принтеру, документы с графикой - к цветному.</P>
+<P>Если флажок "Делать два прохода" установлен, формирование отчета будет осуществляться в два этапа. На первом проходе отчет формируется, осуществляется его разбивка на страницы, но результат нигде не сохраняется. На втором проходе происходит обычное формирование отчета с сохранением результата в потоке. </P>
+<P>Для чего же нужно делать два прохода? Наиболее часто эта опция применяется в случае, если в отчете имеется упоминание об общем количестве страниц в нем, т.е. информация вида "Страница 1 из 15". Общее количество страниц подсчитывается на первом проходе и доступно через системную переменную TOTALPA</FONT><FONT FACE="Arial" SIZE=2>G</FONT><FONT FACE="Arial" SIZE=2>ES. Наиболее частая ошибка - попытка применить эту переменную в однопроходном отчете, в этом случае она возвращает  0.</P>
+<P><A NAME="twoPass"></A>Другая область применения - выполнение каких-либо вычислений на первом проходе и отображение результатов на втором. Например, в случае, когда необходимо отобразить в заголовке группы сумму, которая обычно подсчитывается и отображается в подвале группы. Такого рода вычисления связаны с использованием встроенного языка FR.</P>
+</FONT><B><FONT FACE="Arial" SIZE=1><P>Прим.</B>: использование двухпроходных отчет едва ли Вам потребуется, учитывая, в кроме дат и фото все остальные переменные - текстовые. </P>
+</FONT><B><I><FONT FACE="Arial"><P>Параметры страницы</A></A></A></A></A></P>
+</I></FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">Прим.</B>: пластиковые карточки имеют стандартный формат 85х55 мм. Формат бумаги следует выбирать, руководствуясь тем, какой принтер для печати на карточках у Вас установлен.</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Окно с параметрами страницы доступно из меню "Файл|Параметры страницы..." либо при двойном щелчке левой кнопкой мыши на свободном месте листа отчета. Окно представляет собой блокнот с четырьмя закладками: "Бумага", "Источник", "Поля" и "Параметры".</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>Закладка "Бумага"</P>
+</FONT><FONT FACE="Arial" SIZE=2>
+</B><P ALIGN="JUSTIFY"><IMG SRC="Image34.gif" WIDTH=386 HEIGHT=214></P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Поля ввода ширины и высоты становятся доступными, если из списка "Размер" выбран пункт "Размеры, определяемые пользователем". Следует отметить, что не все драйверы принтеров поддерживают пользовательский размер бумаги. Кроме того, не все принтеры поддерживают произвольные пользовательские размеры (например, драйвер принтера HP LaserJet 6L не дает устанавливать размеры листа меньше чем 76 * 127мм).</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>Закладка "Источник"</P>
+</FONT><FONT FACE="Arial" SIZE=2>
+</B><P ALIGN="JUSTIFY"><IMG SRC="Image35.gif" WIDTH=386 HEIGHT=214></P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>Закладка "Поля"</P>
+</FONT><FONT FACE="Arial" SIZE=2>
+</B><P><IMG SRC="Image36.gif" WIDTH=386 HEIGHT=214></P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">&#9;Здесь можно задать размеры отступа от краев листа, а также задать опцию “Растянуть на область печати”. На этом моменте следует остановиться более подробно.</P>
+<P ALIGN="JUSTIFY">А) Возможны два варианта страницы в дизайнере: с полями печати и без них. Если поля печати включены (по умолчанию), то они отображаются в дизайнере и все, что находится вне полей, на печать не выводится. Это позволяет добиться максимального соответствия между видом страницы в дизайнере и на бумаге. <U>Координаты объектов исчисляются от верхнего левого угла листа.</P>
+</U><P ALIGN="JUSTIFY">Б) Но при переходе на другой принтер из-за изменившихся границ печати некоторые объекты могут вылезти за пределы полей и не будут напечатаны. </FONT><FONT FACE="Arial" SIZE=2 COLOR="#ff0000">Если включить флажок "<B>Растянуть на область печати</B>", то предполагается, что страница в дизайнере соответствует области печати, т.е. все, что находится на странице, будет корректно напечатано на любом принтере.</FONT><FONT FACE="Arial" SIZE=2> </FONT><U><FONT FACE="Arial" SIZE=2>Координаты объектов в этом случае исчисляются от верхнего левого угла области печати.</U> Правда, при этом вид страницы в дизайнере будет немного отличаться от распечатанного документа. </P>
+</FONT><B><FONT FACE="Arial" SIZE=2 COLOR="#ff0000"><P ALIGN="JUSTIFY">Если поля страницы нулевые, то при построении отчета будут использована информация о полях, предоставляемая драйвером принтера.</B></FONT><FONT FACE="Arial" SIZE=2> Если Вы используете матричный принтер, будьте внимательны. Дело в том, что во многих матричных принтерах одно или несколько полей имеет нулевой размер, в связи с чем при формировании отчета и при его распечатке может возникнуть ситуация, когда текст выходит за границы листа. Чтобы избежать этого, явно задавайте поля станицы либо устанавливайте флажок " Растянуть на область печати".</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">&#9;</FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">Следует отметить, что на формирование отчета при включенных полях страницы оказывает непосредственное влияние только установка значений для верхнего и нижнего полей. Левое же и правое поля действуют только для Cross-tab отчетов.</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>Закладка "Параметры"</P>
+</FONT><FONT FACE="Arial" SIZE=2>
+</B><P ALIGN="JUSTIFY"><IMG SRC="Image37.gif" WIDTH=387 HEIGHT=214></P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">На этой закладке можно указать количество колонок для печати многоколоночных отчетов. Текущие установки отображаются в дизайнере.</P>
+<P ALIGN="JUSTIFY">Флажок “Печатать на предыдущем листе” позволяет начать печать страницы, начиная со свободного места на предыдущем листе. Эта опция может применяться в случае, если шаблон отчета состоит из нескольких листов либо при печати составных (composite) отчетов.</P>
+</FONT><B><I><FONT FACE="Arial"><P><A NAME="_Toc465423706"><A NAME="_Toc486331218"><A NAME="_Toc486331770"><A NAME="_Toc486332949"><A NAME="_Toc486333427"><A NAME="_Toc31093029">О</A>пции дизайнера</A></A></A></A></A></P>
+</B></I></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Чтобы установить опции дизайнера, воспользуйтесь командой меню "Сервис|Опции...". </P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image38.gif" WIDTH=358 HEIGHT=394></P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image39.gif" WIDTH=358 HEIGHT=394></P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Здесь можно задать используемые единицы измерения (пикселы, миллиметры, дюймы), указать шаг сетки в точках (шаг сетки 18 точек точно соответствует 5мм. Это особо полезно в случаях, когда надо сделать бланк, размеры которого кратны 5мм. </P>
+<P ALIGN="JUSTIFY">Также можно указать способ прорисовки объектов при их перемещении (или изменения размеров).</P>
+<P ALIGN="JUSTIFY">Опция "Расположение страницы" позволяет выбрать расположение страницы. Это необходимо, если на экране присутствует инспектор объектов: таким образом можно задать взаимное расположение страницы и инспектора.</P>
+<P ALIGN="JUSTIFY">Если опция "Цветные кнопки" отключена, то все кнопки становятся черно-белыми; при наведении указателя мыши на кнопку она показывается в цвете.</P>
+<P>Опция "Показывать заголовки бэндов" позволяет отключать заголовки у бэндов в целях экономии свободного места на странице.</P>
+<P ALIGN="JUSTIFY">Наконец, опция "Редактирование после вставки" управляет процессом вставки новых объектов. Если опция включена, каждый раз при вставке объекта будет показываться его редактор. При вставке большого количества пустых объектов опцию лучше отключать.</P>
+<P ALIGN="JUSTIFY">На закладке "Редактор" можно настроить шрифт для окна редактора текста. При включенной опции "Использовать установки шрифта объекта" шрифт в окне редактора текста будет соответствовать шрифту редактируемого объекта.</P>
+</FONT><B><I><FONT FACE="Arial"><P><A NAME="_Toc486331219"><A NAME="_Toc486331771"><A NAME="_Toc486332950"><A NAME="_Toc486333428"><A NAME="_Toc31093030">Инспектор объектов</A></A></A></A></A></P>
+</B></I></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Инспектор позволяет манипулировать всеми свойствами выбранных объектов. </P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P><IMG SRC="Image378.gif" WIDTH=166 HEIGHT=296 ALIGN="LEFT" HSPACE=12>
+</FONT><FONT FACE="Arial" SIZE=2 COLOR="#000080"><P ALIGN="JUSTIFY">Окно инспектора похоже на Object Inspector в Delphi и функционирует аналогичным образом. </FONT><FONT FACE="Arial" SIZE=2>Так же, как и остальные панели инструментов, его можно показать или скрыть соответствующей командой меню "Сервис|Панели инструментов". Показать окно можно также при нажатии на клавишу F11. Двойной щелчок на заголовке окна инспектора сворачивает окно в полоску, еще один двойной щелчок - восстанавливает исходные размеры.</P>
+</FONT><B><I><FONT FACE="Arial" COLOR="#000080"><P><A NAME="_Toc486331220"><A NAME="_Toc486331772"><A NAME="_Toc486332951"><A NAME="_Toc486333429"><A NAME="_Toc31093031">Диалог вставки полей БД в отчет</A></A></A></A></A></P>
+</B></I></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">&#9;Этот диалог позволяет быстро вставить поле БД в отчет. </P>
+</FONT><B><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">Прим:</B> В связи с блокировкой доступа к полям данных (описано во введении), следует пользоваться готовым словарем данных. </P>
+</FONT><B><I><FONT FACE="Arial"><P><A NAME="_Toc486331221"><A NAME="_Toc486331773"><A NAME="_Toc486332952"><A NAME="_Toc486333430"><A NAME="_Toc31093032">Словарь данных</A></A></A></A></A></P>
+</I></FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">Прим.</B></FONT><FONT FACE="Arial" SIZE=1> </FONT><B><FONT FACE="Arial" SIZE=1 COLOR="#ff0000">Возможность редактировать словарь данных отключена.</P>
+</B></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Окно словаря данных (Data dictionary) доступно из меню "Файл|Словарь данных...". Окно представляет собой блокнот с тремя закладками: "Переменные", "Данные из БД" и "Источники данных для бэндов".</FONT><B><FONT FACE="Arial" SIZE=2 COLOR="#ff0000"> </B></FONT><FONT FACE="Arial" SIZE=2>Словарь данных хранится в файле вместе с формой отчета.</P>
+</FONT><FONT FACE="Arial" SIZE=2>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>Закладка "Переменные"</P>
+<P>Прим</B></FONT><FONT FACE="Arial" SIZE=2>.: </FONT><B><FONT FACE="Arial" SIZE=2 COLOR="#ff0000">фактически, словарь переменных заполняется без Вашего участия и связывается должным образом с наборами данных.</P>
+</B></FONT><FONT FACE="Arial" SIZE=1>
+</FONT><FONT FACE="Arial" SIZE=2><P><IMG SRC="Image379.gif" WIDTH=495 HEIGHT=426></P>
+
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Эта закладка предназначена для работы со списком переменных.</P>
+<P>Список переменных расположен в левой части окна. Как видно из рисунка, структура списка двухуровневая: он состоит из категорий, в каждой категории может быть одна или несколько переменных. Категории нужны только для визуальной группировки переменных и в отчет не вставляются.</P>
+<P>При создании нового отчета список пуст, и чтобы заполнить его, воспользуйтесь кнопками под списком: </FONT><FONT FACE="Arial" SIZE=2><IMG SRC="Image380.gif" WIDTH=21 HEIGHT=21></FONT><FONT FACE="Arial" SIZE=2> - добавляет новую категорию и </FONT><FONT FACE="Arial" SIZE=2><IMG SRC="Image381.gif" WIDTH=21 HEIGHT=21></FONT><FONT FACE="Arial" SIZE=2> - добавляет новую переменную к текущей категории. Эти действия можно также выполнить с клавиатуры: клавиша Insert добавляет новую переменную, Ctrl+Insert добавляет новую категорию. Назначение остальных кнопок следующее: кнопка </FONT><FONT FACE="Arial" SIZE=2><IMG SRC="Image382.gif" WIDTH=21 HEIGHT=21></FONT><FONT FACE="Arial" SIZE=2> редактирует название переменной или категории (клавиатурный аналог - клавиша Enter), кнопка </FONT><FONT FACE="Arial" SIZE=2><IMG SRC="Image383.gif" WIDTH=21 HEIGHT=21></FONT><FONT FACE="Arial" SIZE=2> удаляет переменную или категорию (клавиатурный аналог - клавиша Delete). Кнопка </FONT><FONT FACE="Arial" SIZE=2><IMG SRC="Image384.gif" WIDTH=21 HEIGHT=21></FONT><FONT FACE="Arial" SIZE=2> вызывает редактор списка переменных, где они представлены в виде списка строк. Здесь можно делать массовую вставку переменных из буфера обмена, переносить переменные из одной категории в другую.</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"><IMG SRC="Image47.gif" WIDTH=399 HEIGHT=222></P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>Закладка "Данные из БД"</P>
+</FONT><FONT FACE="Arial" SIZE=1><P>Прим</B>.: в AS101_Badge прямой доступ к данным из БД блокирован.</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>Закладка "Источники данных для бэндов"</P>
+</FONT><FONT FACE="Arial" SIZE=1><P>Прим</B>.: в AS101_Badge прямой доступ к данным из БД блокирован.</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><I><FONT FACE="Arial"><P><A NAME="_Toc486331222"><A NAME="_Toc486331774"><A NAME="_Toc486332953"><A NAME="_Toc486333431"><A NAME="_Toc31093033">Конструктор выражений</A></A></A></A></A></P>
+</B></I></FONT><U><FONT FACE="Arial" SIZE=2 COLOR="#000080"><P ALIGN="JUSTIFY">Окно конструктора выражений можно вызвать из редактора текста, нажав кнопку</U></FONT><FONT FACE="Arial" SIZE=2> <IMG SRC="Image370.gif" WIDTH=22 HEIGHT=22></FONT><FONT FACE="Arial" SIZE=2> на панели инструментов. Оно также доступно из некоторых диалоговых окон, в которых требуется задать некоторое выражение.</P>
+</FONT><FONT FACE="Arial" SIZE=2><P><IMG SRC="Image48.gif" WIDTH=327 HEIGHT=258></FONT><FONT FACE="Arial" SIZE=2>Окно содержит поле ввода выражения и кнопки вызова диалогов вставки переменных, полей БД, функций, а также кнопки быстрой вставки знаков арифметических и логических операций.</P>
+</FONT><FONT FACE="Arial" SIZE=2>
+</FONT><B><FONT FACE="Arial" COLOR="#000080"><P><A NAME="_Toc486331223"><A NAME="_Toc486331775"><A NAME="_Toc486332954"><A NAME="_Toc486333432"><A NAME="_Toc31093034"><A NAME="_Toc486331224"><A NAME="_Toc486331776"><A NAME="_Toc486332955"><A NAME="_Toc486333433"><A NAME="_Toc31093035">Диалог вставки переменной</A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial" SIZE=2><P>Диалог позволяет выбрать переменную для вставки в выражение. Слева размещен список категорий, справа – список переменных в выбранной категории. </FONT><B><U><FONT FACE="Arial" SIZE=2 COLOR="#000080">Для вставки переменной в выражение</B> надо выбрать переменную и нажать кнопку "ОК"</U></FONT><FONT FACE="Arial" SIZE=2>, либо сделать на ней двойной щелчок мышью.</P>
+</FONT><FONT FACE="Arial" SIZE=2>
+</FONT><B><FONT FACE="Arial" COLOR="#000080"><P><A NAME="_Toc486331225"><A NAME="_Toc486331777"><A NAME="_Toc486332956"><A NAME="_Toc486333434"><A NAME="_Toc31093036">Диалог вставки функции</A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial" SIZE=2><P><IMG SRC="Image49.gif" WIDTH=332 HEIGHT=299></FONT><FONT FACE="Arial" SIZE=2>&#9;В этом диалоге можно выбрать функцию для вставки в выражение. При выборе функции в нижней части окна отображается краткое описание функции и списка ее аргументов. Если функция имеет аргументы, то при при нажатии на кнопку "ОК" будет предложено заполнить их.</P>
+</FONT><B><FONT FACE="Arial" COLOR="#000080"><P>Диалог вставки поля БД</A></A></A></A></A></P>
+</FONT><FONT FACE="Arial" SIZE=1><P>Прим</B>.: в AS101_Badge прямой доступ к данным из БД блокирован.</P>
+</FONT><FONT FACE="Arial" SIZE=2><P><IMG SRC="Image50.gif" WIDTH=416 HEIGHT=218></FONT><FONT FACE="Arial" SIZE=2>Диалог позволяет выбрать поле БД для вставки в выражение. Слева размещен список всех доступных таблиц БД, справа – список полей в выбранной таблице. Для вставки поля в выражение надо выбрать поле и нажать кнопку "ОК", либо сделать на поле двойной щелчок мышью.</P>
+</FONT><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P><A NAME="_Toc486331226"><A NAME="_Toc486331778"><A NAME="_Toc486332957"><A NAME="_Toc486333435"><A NAME="_Toc31093037">Панели инструментов</A></A></A></A></A> дизайнера отчетов</P>
+</FONT><I><FONT FACE="Arial"><P><A NAME="_Toc486331227"><A NAME="_Toc486331779"><A NAME="_Toc486332958"><A NAME="_Toc486333436"><A NAME="_Toc31093038">Панель инструментов "Стандартная"</A></A></A></A></A></P>
+</B></I></FONT><FONT FACE="Arial" SIZE=2><P><IMG SRC="Image51.gif" WIDTH=550 HEIGHT=48></P>
+
+<P>&nbsp;</P></FONT>
+<TABLE BORDER CELLSPACING=2 CELLPADDING=7 WIDTH=666>
+<TR><TD WIDTH="12%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Иконка</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"></B></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Название</B></FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Описание</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image385.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Новый отчет</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Создает новый пустой отчет.</FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image386.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Открыть отчет</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Открывает существующий отчет из файла с расширением FRF. Клавиатурный аналог - Ctrl+O.</FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image387.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Сохранить отчет</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Сохраняет отчет в файл с расширением FRF. Клавиатурный аналог - Ctrl+S.</FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image388.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Предварительный просмотр</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Выполняет построение отчета и его предварительный просмотр. Клавиатурный аналог - Ctrl+P.</FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image389.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Вырезать</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Вырезает выделенные объекты в буфер обмена. Клавиатурный аналог - Ctrl+X.</FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image390.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Копировать</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Копирует выделенные объекты в буфер обмена. Клавиатурный аналог - Ctrl+C.</FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image391.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Вставить</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Вставляет объекты из буфера обмена. Клавиатурный аналог - Ctrl+V.</FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image392.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Отменить</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Отменяет последнюю операцию. Число уровней отката - до 100. Клавиатурный аналог - Ctrl+Z.</P>
+</FONT><FONT FACE="Arial" SIZE=2></FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image393.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Повторить</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Повторяет последнюю отмененную операцию. Клавиатурный аналог - Ctrl+Y.</P>
+</FONT><FONT FACE="Arial" SIZE=2></FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image394.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">На передний план</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Помещает выделенные объекты на передний план.</FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image395.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">На задний план</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Помещает выделенные объекты на задний план.</FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image396.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Выделить все</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Выделяет все объекты на странице. Клавиатурный аналог - Ctrl+A.</P>
+</FONT><FONT FACE="Arial" SIZE=2></FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image397.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Новая страница</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Создает новую страницу.</FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image398.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Удалить страницу</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Удаляет текущую страницу.</FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image399.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Свойства страницы</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Вызывает диалог со свойствами страницы.</FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image400.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Показать сетку</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Показывает точечную сетку на странице. Шаг сетки можно задать в опциях дизайнера. Клавиатурный аналог - Ctrl+G.</FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image401.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Выравнивать объекты по сетке</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>При перемещении или изменении размеров объектов координаты/размеры будут изменяться скачкообразно в соответствии с шагом сетки.</FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image402.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Расположить в узлах сетки</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Изменяет размеры/расположение выделенных объектов таким образом, чтобы они размещались в узлах сетки.</FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image403.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Справка</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Показывает справку по элементам управления.</FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image404.gif" WIDTH=44 HEIGHT=21></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Выход</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Закрывает окно дизайнера.</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial" SIZE=2>
+<P>&nbsp;</P>
+</FONT><B><I><FONT FACE="Arial"><P><A NAME="_Toc486331228"><A NAME="_Toc486331780"><A NAME="_Toc486332959"><A NAME="_Toc486333437"><A NAME="_Toc31093039">Панель инструментов "Текст"</A></A></A></A></A></P>
+</B></I></FONT><FONT FACE="Arial" SIZE=2><P><IMG SRC="Image15.gif" WIDTH=549 HEIGHT=48></P>
+
+<P>&nbsp;</P></FONT>
+<TABLE BORDER CELLSPACING=2 CELLPADDING=7 WIDTH=666>
+<TR><TD WIDTH="12%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Иконка</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"></B></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Название</B></FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Описание</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image405.gif" WIDTH=59 HEIGHT=20></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Шрифт</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Позволяет выбрать название шрифта из выпадающего списка. Помнит пять последних использованных шрифтов. Двойной щелчок мышью вызывает стандартный диалог выбора шрифта.</FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image406.gif" WIDTH=47 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Размер шрифта</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Позволяет выбрать размер шрифта из выпадающего списка. Размер можно также ввести вручную.</FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image407.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Утолщение</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Устанавливает/снимает утолщение шрифта. Клавиатурный аналог - Ctrl+B.</FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image408.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Наклон</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Устанавливает/снимает наклон шрифта. Клавиатурный аналог - Ctrl+I.</FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image409.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Подчеркивание</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Устанавливает/снимает подчеркивание шрифта. Клавиатурный аналог - Ctrl+U.</FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image410.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Цвет шрифта</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Выбирает цвет шрифта из выпадающего списка.</FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image377.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Условное выделение</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Показывает диалог с атрибутами выделения для выбранного объекта "Текст".</FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image411.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Выравнивание влево</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Устанавливает выравнивание текста влево.</FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image412.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Выравнивание по центру</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Устанавливает выравнивание текста по центру.</FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image413.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Выравнивание вправо</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Устанавливает выравнивание текста вправо.</FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image414.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Выравнивание по ширине</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Устанавливает выравнивание текста равномерно по ширине.</FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image415.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Выравнивание по верхнему краю</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Устанавливает выравнивание текста по верхнему краю.</FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image416.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Выравнивание по высоте</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Устанавливает выравнивание текста по высоте.</FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image417.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Выравнивание по нижнему краю</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Устанавливает выравнивание текста по нижнему краю.</P>
+</FONT><FONT FACE="Arial" SIZE=2></FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image418.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Вертикальный текст</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Переключает нормальный/вертикальный шрифт.</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial" SIZE=2>
+<P>&nbsp;</P>
+</FONT><B><I><FONT FACE="Arial"><P><A NAME="_Toc486331229"><A NAME="_Toc486331781"><A NAME="_Toc486332960"><A NAME="_Toc486333438"><A NAME="_Toc31093040">Панель инструментов "Прямоугольник"</A></A></A></A></A></P>
+</B></I></FONT><FONT FACE="Arial" SIZE=2><P><IMG SRC="Image16.gif" WIDTH=268 HEIGHT=48></P>
+
+<P>&nbsp;</P></FONT>
+<TABLE BORDER CELLSPACING=2 CELLPADDING=7 WIDTH=666>
+<TR><TD WIDTH="12%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Иконка</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"></B></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Название</B></FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Описание</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image419.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Верхняя линия</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Включает/выключает верхнюю линию рамки.</FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image420.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Левая линия</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Включает/выключает левую линию рамки.</FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image421.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Нижняя линия</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Включает/выключает нижнюю линию рамки.</FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image422.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Правая линия</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Включает/выключает правую линию рамки.</FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image423.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Все линии</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Включает все линии рамки.</FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image424.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Нет линий</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Выключает все линии рамки.</FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image425.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Цвет фона</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Выбирает цвет фона из выпадающего списка.</FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image426.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Цвет линии</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Выбирает цвет линии из выпадающего списка.</FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image427.gif" WIDTH=22 HEIGHT=22></P>
+<P ALIGN="CENTER"></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Стиль линии</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Выбирает стиль линии из выпадающего списка.</FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image428.gif" WIDTH=42 HEIGHT=24></FONT></TD>
+<TD WIDTH="18%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Толщина линии</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Выбирает толщину линии из выпадающего списка.</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial" SIZE=2>
+<P>&nbsp;</P>
+</FONT><B><I><FONT FACE="Arial"><P><A NAME="_Toc486331230"><A NAME="_Toc486331782"><A NAME="_Toc486332961"><A NAME="_Toc486333439"><A NAME="_Toc31093041">Панель инструментов "Выравнивание"</A></A></A></A></A></P>
+</B></I></FONT><FONT FACE="Arial" SIZE=2><P><IMG SRC="Image96.gif" WIDTH=238 HEIGHT=48></P>
+</FONT>
+<TABLE BORDER CELLSPACING=2 CELLPADDING=7 WIDTH=668>
+<TR><TD WIDTH="12%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Иконка</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"></B></FONT></TD>
+<TD WIDTH="88%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Описание</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image429.gif" WIDTH=22 HEIGHT=22></FONT></TD>
+<TD WIDTH="88%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Выровнять левые края.</P>
+</FONT><FONT FACE="Arial" SIZE=2></FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image430.gif" WIDTH=22 HEIGHT=22></FONT></TD>
+<TD WIDTH="88%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Центрировать по горизонтали.</P>
+</FONT><FONT FACE="Arial" SIZE=2></FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image431.gif" WIDTH=22 HEIGHT=22></FONT></TD>
+<TD WIDTH="88%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Центрировать по горизонтали в окне.</P>
+</FONT><FONT FACE="Arial" SIZE=2></FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image432.gif" WIDTH=22 HEIGHT=22></FONT></TD>
+<TD WIDTH="88%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Расположить равномерно по ширине.</P>
+</FONT><FONT FACE="Arial" SIZE=2></FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image433.gif" WIDTH=22 HEIGHT=22></FONT></TD>
+<TD WIDTH="88%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Выровнять правые края</P>
+</FONT><FONT FACE="Arial" SIZE=2></FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image434.gif" WIDTH=22 HEIGHT=22></FONT></TD>
+<TD WIDTH="88%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Выровнять верхние края.</P>
+</FONT><FONT FACE="Arial" SIZE=2></FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image435.gif" WIDTH=22 HEIGHT=22></FONT></TD>
+<TD WIDTH="88%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Центрировать по вертикали.</P>
+</FONT><FONT FACE="Arial" SIZE=2></FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image436.gif" WIDTH=22 HEIGHT=22></FONT></TD>
+<TD WIDTH="88%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Центрировать по вертикали в окне.</P>
+</FONT><FONT FACE="Arial" SIZE=2></FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image437.gif" WIDTH=22 HEIGHT=22></FONT></TD>
+<TD WIDTH="88%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Расположить равномерно по высоте.</P>
+</FONT><FONT FACE="Arial" SIZE=2></FONT></TD>
+</TR>
+<TR><TD WIDTH="12%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"><IMG SRC="Image438.gif" WIDTH=22 HEIGHT=22></FONT></TD>
+<TD WIDTH="88%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Выровнять нижние края.</P>
+</FONT><FONT FACE="Arial" SIZE=2></FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P>Дополнительные элементы для создания макетов</P>
+</FONT><FONT FACE="Arial" SIZE=2 COLOR="#ff0000"><P>ПРИМЕЧАНИЕ</B></FONT><FONT FACE="Arial" SIZE=2 COLOR="#ff0000">: </FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">все перечисленные ниже элементы <U>не могут использоваться в полном объеме</U>, так как требуется прямой доступ к данным БД и словарю. В AS101_Badge <U>они блокированы по соображениям безопасности.</P>
+</U></FONT><B><I><P><A NAME="_Toc486331186"><A NAME="_Toc486331739"><A NAME="_Toc486332914"><A NAME="_Toc486333393"><A NAME="_Toc31092992"><IMG SRC="Image358.gif" WIDTH=22 HEIGHT=22>  <FONT FACE="Arial">Объект “Секция” (Бэнд)</A></A></A></A></A> </P>
+</B></I></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Дизайнер отчетов, как и многие другие распространенные продукты, является бэнд-ориентированным построителем отчетов. Ниже приведен полный перечень бэндов и выполняемых ими функций.</P>
+</FONT><FONT FACE="Arial" SIZE=2></FONT>
+<P ALIGN="CENTER"><CENTER><TABLE BORDER CELLSPACING=2 CELLPADDING=7 WIDTH=604>
+<TR><TD WIDTH="28%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Название</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"></B></FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Функция</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Report title </FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>печатается один раз в начале отчета</P>
+</FONT><FONT FACE="Arial" SIZE=2></FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Report summary </FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>печатается один раз в конце отчета</P>
+</FONT><FONT FACE="Arial" SIZE=2></FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Page header </FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>печатается вверху на каждой странице</P>
+</FONT><FONT FACE="Arial" SIZE=2></FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Page footer </FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>печатается внизу на каждой странице</P>
+</FONT><FONT FACE="Arial" SIZE=2></FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Master header </FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>печатается в начале списка 1-го уровня</P>
+</FONT><FONT FACE="Arial" SIZE=2></FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Master data </FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>данные списка 1-го уровня</P>
+</FONT><FONT FACE="Arial" SIZE=2></FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Master footer </FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>печатается в конце списка 1-го уровня</P>
+</FONT><FONT FACE="Arial" SIZE=2></FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Detail header </FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>печатается в начале списка 2-го уровня</P>
+</FONT><FONT FACE="Arial" SIZE=2></FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Detail data </FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>данные списка 2-го уровня</P>
+</FONT><FONT FACE="Arial" SIZE=2></FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Detail footer </FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>печатается в конце списка 2-го уровня</P>
+</FONT><FONT FACE="Arial" SIZE=2></FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Subdetail header </FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>печатается в начале списка 3-го уровня</P>
+</FONT><FONT FACE="Arial" SIZE=2></FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Subdetail data </FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>данные списка 3-го уровня</P>
+</FONT><FONT FACE="Arial" SIZE=2></FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Subdetail footer </FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>печатается в конце списка 3-го уровня</P>
+</FONT><FONT FACE="Arial" SIZE=2></FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Overlay </FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>печатается на каждой странице нижним слоем</P>
+</FONT><FONT FACE="Arial" SIZE=2></FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Column header </FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>печатается в начале каждой колонки</P>
+</FONT><FONT FACE="Arial" SIZE=2></FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Column footer </FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>печатается в конце каждой колонки</P>
+</FONT><FONT FACE="Arial" SIZE=2></FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Group header </FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>заголовок группы</P>
+</FONT><FONT FACE="Arial" SIZE=2></FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Group footer </FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>печатается после группы</P>
+</FONT><FONT FACE="Arial" SIZE=2></FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Cross header</P>
+<P>Cross data</P>
+<P>Cross footer</P>
+</FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>эта группа бэндов предназначена для создания отчетов с переменным количеством столбцов и разбивкой на страницы</FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Child</FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>может быть прикреплен к любому из бэндов, кроме Page footer, и выводиться вместе с ним.</FONT></TD>
+</TR>
+</TABLE>
+</CENTER></P>
+
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">В зависимости от типа бэнда в контекстном меню доступны следующие опции:</P>
+
+<UL>
+<P ALIGN="JUSTIFY"><LI>"растягиваемый" (<A NAME="stretched_band"></A></FONT><B><FONT FACE="Arial" SIZE=2 COLOR="#000080">Stretched</B></FONT><FONT FACE="Arial" SIZE=2>) - высота бэнда определяется максимальной высотой находящихся в нем объектов. </FONT><U><FONT FACE="Arial" SIZE=2 COLOR="#000080">У объектов также должна быть включена опция "растягиваемый"</U></FONT><FONT FACE="Arial" SIZE=2>;</LI></P>
+</FONT><U><FONT FACE="Arial" SIZE=2 COLOR="#000080"><P ALIGN="JUSTIFY"><LI>"разрываемый" (</FONT><B><FONT FACE="Arial" SIZE=2 COLOR="#000080">Breaked</B></FONT><FONT FACE="Arial" SIZE=2 COLOR="#000080">) - если бэнд не помещается целиком на странице, будут выведены только поместившиеся строки текста, </U></FONT><FONT FACE="Arial" SIZE=2>а вывод остальных будет продолжен с новой страницы;</LI></P>
+<P ALIGN="JUSTIFY"><LI>"формировать новую страницу" (FormNewPage) - после печати бэнда формирование отчета продолжается с новой страницы. Если опция включена у дата-бэнда, то новая страница будет сформирована после вывода всех подбэндов;</LI></P>
+<P ALIGN="JUSTIFY"><LI>"на первой странице" (OnFirstPage) - если опция отключена, то бэнд не будет выведен на первой странице;</LI></P>
+<P ALIGN="JUSTIFY"><LI>"на последней странице" (OnLastPage) - если опция отключена, то бэнд не будет выведен на последней странице;</LI></P>
+<P ALIGN="JUSTIFY"><LI>"повторять на всех страницах" (</FONT><B><FONT FACE="Arial" SIZE=2 COLOR="#000080">RepeatHeader</B></FONT><FONT FACE="Arial" SIZE=2>) - эта опция доступна у бэндов Master header, Detail header, Subdetail header, Group header, Cross header. </FONT><U><FONT FACE="Arial" SIZE=2 COLOR="#000080">При включении дублирует бэнд на новой странице или колонке.</LI></P></UL>
+
+</U></FONT><B><I><FONT FACE="Arial"><P><A NAME="_Toc452349851"><A NAME="_Toc465423690"></FONT><A NAME="_Toc486331188"><A NAME="_Toc486331741"><A NAME="_Toc486332916"><A NAME="_Toc486333395"><A NAME="_Toc31092994"><IMG SRC="Image360.gif" WIDTH=22 HEIGHT=22>  <FONT FACE="Arial">Объект “Вложенный отчет” (SubReport)</A></A></A></A></A></A></A></P>
+</B></I></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Вложенный отчет - это отчет с размещенным на нем объектом SubReport, который   представляет собой ссылку на другой отчет, расположенный на отдельной странице. При формировании такого отчета вместо объекта SubReport будет выведен соответствующий отчет. </P>
+<P ALIGN="JUSTIFY">Объекты SubReport можно располагать на листе друг под другом или рядом. В случае, если объекты надо расположить друг под другом, их необходимо разнести по разным дата-бэндам (т.е. первый отчет - в первом бэнде Masterdata, второй  - во втором и т.д.). </FONT><U><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">На использование SubReports накладываются следующие ограничения</U></FONT><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">:</P>
+
+<UL>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"><LI>нельзя использовать колонки;</LI></P>
+<P ALIGN="JUSTIFY"><LI>во  вложенных  отчетах  (не в основном!)  игнорируются бэнды ReportTitle, ReportSummary, PageHeader, PageFooter, ColumnXXX;</LI></P>
+<P ALIGN="JUSTIFY"><LI>нельзя использовать разрываемые бэнды;</LI></P>
+<P ALIGN="JUSTIFY"><LI>нельзя использовать группы.</LI></P></UL>
+
+</FONT><B><I><FONT FACE="Arial"><P><A NAME="_Toc452349853"><A NAME="_Toc465423692"></FONT><A NAME="_Toc486331190"><A NAME="_Toc486331743"><A NAME="_Toc486332918"><A NAME="_Toc486333397"><A NAME="_Toc31092996"><IMG SRC="Image365.gif" WIDTH=22 HEIGHT=22>  <FONT FACE="Arial">Объект “CheckBox”</A></A></A></A></A></A></A></P>
+</B></I></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Представляет собой прямоугольник с крестиком внутри. Если в мемо объекта поместить ссылку на переменную либо на поле таблицы БД, то <U>крестик будет показан при ненулевом значении переменной</U>. В мемо можно также поместить символ “0” либо отличный от нуля.</P>
+<P ALIGN="JUSTIFY">В инспекторе объектов можно выбрать тип CheckBox’a: с крестиком или с галочкой (свойство CheckStyle).</P>
+<U><P ALIGN="JUSTIFY">Примечание</U></FONT><FONT FACE="Arial" SIZE=2>. </FONT><FONT FACE="Arial" SIZE=2 COLOR="#ff0000">Все вышеописанные объекты являются встроенными</FONT><FONT FACE="Arial" SIZE=2>. Для использования этого объекта и всех прочих в run-time следует использовать соответствующий компонент из палитры компонентов FR. </FONT><B><FONT FACE="Arial" SIZE=2 COLOR="#000080">Если открываемый отчет содержит неподключенные компоненты, то выдастся сообщение об ошибке</B></FONT><FONT FACE="Arial" SIZE=2>.</P>
+</FONT><B><I><FONT FACE="Arial"><P><A NAME="_Toc452349856"><A NAME="_Toc465423695"></FONT><A NAME="_Toc486331193"><A NAME="_Toc486331746"><A NAME="_Toc486332921"><A NAME="_Toc486333400"><A NAME="_Toc31092999"><IMG SRC="Image368.gif" WIDTH=22 HEIGHT=22>  <FONT FACE="Arial">Объект “Диаграмма”</A></A></A></A></A></A></A></P>
+</B></I></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Предназначен для вставки графика или диаграммы в документ. Возможно использование шести типов графиков: линии, точки, столбцы горизонтальные и вертикальные, области и круговые диаграммы. Редактор объекта представляет собой блокнот с тремя закладками: "Тип", "Данные" и "Пометки". Здесь можно задать различные опции для графика</FONT><FONT FACE="Arial" SIZE=2>,</FONT><FONT FACE="Arial" SIZE=2> а также указывать объекты, содержимое которых будет использовано при построении графика.</P>
+</FONT><B><FONT FACE="Arial" COLOR="#000080"><P><A NAME="_Toc31093000">Закладка "Тип"</A></P>
+</FONT><FONT FACE="Arial" SIZE=2>
+</B><P ALIGN="JUSTIFY"><IMG SRC="Image107.gif" WIDTH=275 HEIGHT=257></P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">На этой закладке можно выбрать один из шести типов диаграммы, а также указать различные опции:</P>
+
+<UL>
+<P ALIGN="JUSTIFY"><LI>"объемная" - при включении диаграмма становится трехмерной;</LI></P>
+<P ALIGN="JUSTIFY"><LI>"одиночная" - должна быть включена, если на диаграмме расположен один график;</LI></P>
+<P ALIGN="JUSTIFY"><LI>"с подписью" - при включенной опции выводит рядом с диаграммой поясняющую подпись;</LI></P>
+<P ALIGN="JUSTIFY"><LI>"с осями" - выводить оси (нужно отключать для круговой диаграммы);</LI></P>
+<P ALIGN="JUSTIFY"><LI>"с пометками" - выводит пометки над каждым значением</LI></P>
+<P ALIGN="JUSTIFY"><LI>"разноцветная" - если опция включена, каждое значение в диаграмме (столбец, сектор, линия) показывается разными цветами.</LI></P></UL>
+
+<P ALIGN="JUSTIFY">При построении отчета информация будет накапливаться в мемо:</P>
+<P ALIGN="JUSTIFY">Заголовок1;Заголовок2;Заголовок3</P>
+<P ALIGN="JUSTIFY">Число1;Число2;Число3</P>
+<P ALIGN="JUSTIFY">График можно построить и вручную, если занести в мемо объекта соответствующие значения. Если количество строк заголовка не соответствует количеству значений, график выведен не будет.</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+</FONT><B><FONT FACE="Arial" COLOR="#000080"><P><A NAME="_Toc31093001">Закладка "Данные"</A></P>
+</FONT><FONT FACE="Arial" SIZE=2>
+</B><P ALIGN="JUSTIFY"><IMG SRC="Image108.gif" WIDTH=275 HEIGHT=257></P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Для построения графика необходимо указать имена двух объектов типа "Текст", в которых содержится название и соответствующее числовое значение. При построении отчета содержимое этих объектов будет накапливаться в мемо диаграммы. </P>
+<P ALIGN="JUSTIFY">Если объект содержит число в форматированном виде или комбинацию числа и строки (например, "$1000" или "10 000"), то FR попытается выделить числовую часть из строки. Алгоритм выделения - удаляются все нецифровые символы в начале и в конце строки, после этого удаляются все символы - разделители разрядов (как правило, пробелы). То есть если задано более сложное форматирование, например: "10000км2", то такие объекты использовать уже нельзя. В этом случае следует создать невидимый объект с аналогичным содержимым, но без всякого форматирования, и указывать его имя. Невидимым объект можно сделать с помощью инспектора объектов в дизайнере, установив параметр Visible в 0.</P>
+<P ALIGN="JUSTIFY">Объект позволяет легко строить графики типа "Top10", т.е. график, в котором представлены только первые самые большие значения, а остальные значения просуммированы в отдельную группу с названием. Для этого необходимо указать количество выводимых значений и подпись (обычно в качестве подписи используется слово "Другие").</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+</FONT><B><FONT FACE="Arial" COLOR="#000080"><P><A NAME="_Toc31093002">Закладка "Пометки"</A></P>
+</FONT><FONT FACE="Arial" SIZE=2>
+</B><P ALIGN="JUSTIFY"><IMG SRC="Image109.gif" WIDTH=275 HEIGHT=257></P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">На этой закладке можно указать, какие значения выводить в качестве пометок.</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P>Программирование в дизайнере отчетов</P>
+</B></FONT><FONT FACE="Arial" SIZE=2><P>Этот раздел будет полезен Вам только в том случае, если необходима какая-либо дополнительная обработка данных: например, в зависимости от значения поля VIP следует печатать (или не печатать) те или иные поля отчета. Или при печати карточки каким-то образом учитывать срок действия карточки.</P>
+<P>Следует помнить, что ряд полей данных клиентов в СКД AS101 может быть настроен на использование нестандартным образом, что и дает возможность проводить дальнейшую обработку данных непосредственно в отчете.</P>
+</FONT><B><I><FONT FACE="Arial"><P><A NAME="_Toc486331270"><A NAME="_Toc486331822"><A NAME="_Toc486333001"><A NAME="_Toc486333474"><A NAME="_Toc31093076">Скрипты и объекты</A></A></A></A></A></P>
+</B></I></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">В каждом объекте может быть размещен один или несколько (блок) операторов. Редактирование скрипта производится в окне редактора текста (для того, чтобы увидеть скрипт, надо нажать кнопку </FONT><FONT FACE="Arial" SIZE=2><IMG SRC="Image374.gif" WIDTH=22 HEIGHT=22></FONT><FONT FACE="Arial" SIZE=2> в верхней части окна). Скрипт выполняется каждый раз перед печатью объекта. По сути, скрипт является обработчиком события OnBeforePrint объекта.</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image110.gif" WIDTH=388 HEIGHT=204></P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><U><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Скрипт имеется не только у объектов. И бэнды, и страницы отчета </U>также имеют свой скрипт. Вызвать скрипт бэнда можно, вызвав редактор свойства OnBeforePrint бэнда (из инспектора объектов, либо выделив бэнд и нажав Ctrl+Enter). Вызвать скрипт страницы отчета можно, вызвав редактор свойства OnBeforePrint страницы (для этого надо щелкнуть на пустом месте страницы и вызвать редактор из инспектора объектов). Диалоговая форма, как и страница отчета, имеет скрипт - свойство OnActivate. Скрипт остальных объектов может быть вызван через их свойство Memo либо при нажатии Ctrl+Enter.</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><I><FONT FACE="Arial"><P><A NAME="_Toc486331271"><A NAME="_Toc486331823"><A NAME="_Toc486333002"><A NAME="_Toc486333475"><A NAME="_Toc31093077">Написание кода</A></A></A></A></A> ("на что можно ссылаться в скрипте")</P>
+</B></I></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">В скрипте можно использовать свойства и методы объектов отчета, поля таблиц БД, различные константы. Также можно создавать переменные и массивы, которые будут доступны во всем отчете. Кроме того, можно использовать процедуры и функции.</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Использование переменных</P>
+</B><P ALIGN="JUSTIFY">Переменную <U>описывать не надо</U>, она имеет тип Variant. В имени переменной можно использовать латинские буквы, цифры и знак подчеркивания. Переменную из скрипта можно использовать в объектах, и наоборот, переменную из списка переменных можно использовать в скрипте. </P>
+<P ALIGN="JUSTIFY">Скриптовые переменные хранятся в объекте TfrVariables, к которому есть доступ через глобальную переменную frVariables.</P>
+<P ALIGN="JUSTIFY">Кроме этого, можно обращаться к переменным, определенным в словаре данных, к системным переменным, а также пользовательским переменным. При этом переменные могут содержать в имени недопустимые с точки зрения синтаксиса символы (например, системная переменная Page#). Обращаться к таким переменным следует с использованием квадратных скобок:</P>
+</FONT><FONT FACE="Courier New" SIZE=2 COLOR="#000080"><P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">begin</P>
+</B><P ALIGN="JUSTIFY">  a := [Page#];</P>
+<B><P ALIGN="JUSTIFY">end</P>
+</B></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Массивы</P>
+</B><P ALIGN="JUSTIFY">&#9;В скрипте, помимо переменных, можно создавать массивы. Массивы могут быть <U>только одномерными</U>, но можно организовать доступ к элементам массива таким образом, что можно трактовать массив как двумерный или с большим количеством измерений.</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Пример использования массива:</P>
+</FONT><B><FONT FACE="Courier New" SIZE=2 COLOR="#000080"><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">begin</P>
+</B><P ALIGN="JUSTIFY">  MyArr[0] := 'a'; MyArr[1] := 'b'; MyArr[3] := 'd';</P>
+<P ALIGN="JUSTIFY">  MyArr[2] := MyArr[0] + MyArr[1] + 'c' + MyArr[3];</P>
+<B><P ALIGN="JUSTIFY">end</B>;</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Фактически значения элементов массива хранятся в списке frVariables в виде </P>
+<P ALIGN="JUSTIFY">Arr_имя массива_индекс. Т.е. в вышеприведенном примере мы получим содержимое frVariables:</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Courier New" SIZE=2 COLOR="#000080"><P ALIGN="JUSTIFY">Arr_MyArr_0 := 'a'</P>
+<P ALIGN="JUSTIFY">Arr_MyArr_1 := 'b'</P>
+<P ALIGN="JUSTIFY">Arr_MyArr_2 := 'abcd'</P>
+<P ALIGN="JUSTIFY">Arr_MyArr_3 := 'd'</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Константы</P>
+</B><P ALIGN="JUSTIFY">&#9;В </FONT><FONT FACE="Arial" SIZE=2 COLOR="#ff0000">скрипте можно использовать константы</FONT><FONT FACE="Arial" SIZE=2>. Простейший пример - использование числовых, строковых и логических констант:</P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Courier New" SIZE=2 COLOR="#000080"><P ALIGN="JUSTIFY">begin</P>
+</B><P ALIGN="JUSTIFY">  a := 0;</P>
+<P ALIGN="JUSTIFY">  b := 'abcd';</P>
+<P ALIGN="JUSTIFY">  c := True;</P>
+<P ALIGN="JUSTIFY">  d := 'That''s all!';</P>
+<B><P ALIGN="JUSTIFY">end</B>;</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Обратите внимание на использование одинарной кавычки внутри строковой константы - как и в Pascal, <U>ее надо дублировать</U></FONT><FONT FACE="Arial" SIZE=2>: </FONT><FONT FACE="Courier New" SIZE=2 COLOR="#000080">d := 'That''s all!'</FONT><FONT FACE="Arial" SIZE=2 COLOR="#000080">.</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">&#9;Кроме простых констант, в скрипте доступны константы - названия цветов, стилей шрифта и пр. Вот список констант, которые можно использовать:</P>
+</FONT><FONT FACE="Arial" SIZE=2>
+</FONT><B><FONT FACE="Arial" SIZE=2 COLOR="#000080"><P>– цвета:</B></FONT><FONT FACE="Arial" SIZE=2> clWhite, clBlack и т.п. - все стандартные цвета + системные цвета;</P>
+<P>результат работы диалогового окна: mrNone, mrOk, mrCancel;</P>
+</FONT><B><FONT FACE="Arial" SIZE=2 COLOR="#000080"><P>– служебные</B></FONT><FONT FACE="Arial" SIZE=2>: </FONT><B><FONT FACE="Arial" SIZE=2 COLOR="#ff0000">CRLF, Null</B></FONT><FONT FACE="Arial" SIZE=2>;</P>
+</FONT><B><FONT FACE="Arial" SIZE=2 COLOR="#000080"><P>– стиль шрифта: </FONT><FONT FACE="Arial" SIZE=2 COLOR="#ff0000">fsBold, fsItalic, fsUnderline</B></FONT><FONT FACE="Arial" SIZE=2>;</P>
+</FONT><B><FONT FACE="Arial" SIZE=2 COLOR="#000080"><P>– рамка объекта:</FONT><FONT FACE="Arial" SIZE=2 COLOR="#ff0000"> frftNone, frftRight, frftBottom, frftLeft, frftTop;</P>
+</B></FONT><FONT FACE="Arial" SIZE=2><P>выравнивание текста в объекте "Текст": frtaLeft, frtaRight, frtaCenter, frtaVertical, frtaMiddle, frtaDown;</P>
+<P>выравнивание по бэнду: baNone, baLeft, baRight, baCenter, baWidth, baBottom.</P>
+<P>Кроме того, определены константы для подключаемых объектов, например, </FONT><I><FONT FACE="Arial" SIZE=2>csCheck</I></FONT><FONT FACE="Arial" SIZE=2> для объекта "CheckBoxObject". Все, что можно видеть в выпадающих списках свойств в инспекторе объектов, можно использовать как константу в скрипте.</P>
+</FONT><FONT FACE="Arial" SIZE=2>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=2 COLOR="#0000ff"><P>Обращение к объектам</P>
+</B></FONT><FONT FACE="Arial" SIZE=2><P>&#9;В скрипте можно обращаться к свойствам и методам объектов отчета.</FONT><B><FONT FACE="Arial" SIZE=2> </B></FONT><FONT FACE="Arial" SIZE=2>К объектам отчета относятся визуальные объекты, элементы управления, бэнды, страницы отчета, сам отчет. Для обращения к объекту применятся точечная нотация, например: </FONT><I><FONT FACE="Arial" SIZE=2>Memo1.Text</I></FONT><FONT FACE="Arial" SIZE=2>. Для обращения к собственным свойствам или методам точечная нотация необязательна.</P>
+<P>&#9;Свойства, к которым возможно обращение, отображены в инспекторе объектов. К некоторым комплексным свойствам (например, Font) возможно обращение как к </FONT><I><FONT FACE="Arial" SIZE=2>Font.Name, Font.Size</I></FONT><FONT FACE="Arial" SIZE=2> и т.п.:</P>
+</FONT><FONT FACE="Arial" SIZE=2>
+</FONT><B><FONT FACE="Courier New" SIZE=2 COLOR="#000080"><P ALIGN="JUSTIFY">begin</P>
+</B><P ALIGN="JUSTIFY">  Memo1.Font.Name := 'Courier New';</P>
+<P ALIGN="JUSTIFY">  Memo1.Font.Size := 10;</P>
+<P ALIGN="JUSTIFY">  <U>Memo1.Font.Color := clRed;</P>
+</U><P ALIGN="JUSTIFY">  <U>Memo1.Font.Style := fsBold + fsItalic</P>
+</U><B><P ALIGN="JUSTIFY">end</B>;</P>
+</FONT><FONT FACE="Arial" SIZE=2>
+</FONT><FONT FACE="Arial" SIZE=2><P>К свойствам типа TStrings (Memo, SQL, Items и пр.) возможен доступ по индексу:</P>
+</FONT><B><FONT FACE="Courier New" SIZE=2>
+</FONT><FONT FACE="Courier New" SIZE=2 COLOR="#000080"><P>if</B> Memo1.Lines[1] = 'a' <B>then</P>
+</B><P>  Memo1.Lines[1] := 'b'</P>
+</FONT><FONT FACE="Arial" SIZE=2>
+</FONT><FONT FACE="Arial" SIZE=2><P>Также к таким свойствам могут применяться операции Add, Delete, Clear и Count:</P>
+</FONT><FONT FACE="Arial" SIZE=1>
+</FONT><B><FONT FACE="Courier New" SIZE=2 COLOR="#000080"><P>if</B> Memo1.Lines.Count &gt; 10 <B>then</P>
+</B><P>  Memo1.Lines.Delete(10) </P>
+<B><P>else</P>
+<P>begin</P>
+</B><P>  Memo1.Lines.Clear;</P>
+<P>  Memo1.Lines.Add('a');</P>
+<B><P>end</B>;</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Полный список свойств и методов объектов см. в разделе "Свойства и методы объектов". </FONT><U><FONT FACE="Arial" SIZE=2 COLOR="#ff0000">Следует отметить, что обращение к несуществующему методу или свойству не приведет к сообщению об ошибке. Поэтому <B>следует быть осторожным при написании кода</U></FONT><FONT FACE="Arial" SIZE=2 COLOR="#ff0000">.</P>
+</B></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P><A NAME="_Toc486331274"><A NAME="_Toc486331826"><A NAME="_Toc486333005"><A NAME="_Toc486333478"><A NAME="_Toc31093080">Свойства и методы объекто</A></A></A></A></A>в дизайнера отчетов</P>
+</B></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">&#9;Все визуальные объекты отчета являются потомками класса TfrView. Он имеет следующие свойства и методы, к которым можно обращаться из скрипта:</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P></FONT>
+<TABLE BORDER CELLSPACING=2 CELLPADDING=7 WIDTH=668>
+<TR><TD WIDTH="21%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Свойство</B></FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Тип</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"></B></FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Описание</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">BandAlign</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Integer</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Выравнивание внутри бэнда. Одна из констант   baNone, baLeft, baRight, baCenter, baWidth, baBottom.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Enabled</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Boolean</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Разрешает или запрещает работу объекта.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">FillColor</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Integer</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Цвет фона объекта. Может быть задан константой clXXX.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">FrameColor</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Integer</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Цвет рамки объекта.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">FrameStyle</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Integer</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Стиль линии рамки. Одна из констант psSolid, psDash, psDot, psDashDot, psDashDotDot, psDouble.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">FrameTyp</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Integer</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Тип рамки объекта - набор констант frftTop, frftBottom, frftLeft, frftRight.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">FrameWidth</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Double</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Толщина рамки.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Height</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Integer</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Высота объекта.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Left</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Integer</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Координата Х левого верхнего угла объекта.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Memo</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">String</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Текст, находящийся в мемо объекта. К этому свойству можно также обращаться с использованием индекса, например: Memo[1].</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Memo.Count</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Integer</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Возвращает количество строк в мемо.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Name</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">String</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Имя объекта.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Stretched</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Boolean</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Является ли объект растягиваемым.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Top</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Integer</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Координата Y левого верхнего угла объекта.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Visible</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Boolean</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Видимость объекта. </FONT><B><FONT FACE="Arial" SIZE=2 COLOR="#0000ff">(при печати)</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Width</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Integer</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Ширина объекта.</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Методы:</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P></FONT>
+<TABLE BORDER CELLSPACING=2 CELLPADDING=7 WIDTH=668>
+<TR><TD WIDTH="21%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Метод</B></FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Параметры</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"></B></FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Описание</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Hide</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">-</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Аналогично установке Visible := False.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Memo.Add</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">String</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Добавляет строку в мемо.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Memo.Clear</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">-</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Очищает мемо.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Memo.Delete</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Integer</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Удаляет строку с данным индексом из мемо.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Show</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">-</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Аналогично установке Visible := True.</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P>Стандартные объекты</P>
+</B></FONT><FONT FACE="Arial" SIZE=2>
+<P>&nbsp;</P>
+</FONT><B><I><FONT FACE="Arial"><P><A NAME="_Toc31093081">Объект "Текст" (TfrMemoView)</A></P>
+</B></I></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">&#9;Помимо общих свойств и методов, которые были рассмотрены выше, объект имеет собственные свойства: </P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P></FONT>
+<TABLE BORDER CELLSPACING=2 CELLPADDING=7 WIDTH=668>
+<TR><TD WIDTH="21%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Свойство</B></FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Тип</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"></B></FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Описание</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Alignment</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Integer</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Выравнивание текста внутри объекта. Набор значений frtaLeft, frtaRight, frtaCenter, frtaVertical</FONT><FONT FACE="Arial" SIZE=2>, frtaMiddle, frtaDown.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2 COLOR="#ff0000"><P ALIGN="JUSTIFY">AutoWidth</B></FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Boolean</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Если True, ширина объекта устанавливается равной ширине имеющегося в объекте текста.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">CharSpacing</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Integer</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Расстояние между символами.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Font.Name</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">String</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Имя шрифта, которым будет выведен текст объекта.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Font.Size</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Integer</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Размер шрифта.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2 COLOR="#ff0000"><P ALIGN="JUSTIFY">Font.Style</B></FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Integer</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Стиль шрифта. Набор констант fsBold, fsItalic, fsUnderline.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2 COLOR="#ff0000"><P ALIGN="JUSTIFY">Font.Color</B></FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Integer</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Цвет шрифта.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2 COLOR="#ff0000"><P ALIGN="JUSTIFY">GapX</B></FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Integer</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Промежуток между рамкой объекта и текстом.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2 COLOR="#ff0000"><P ALIGN="JUSTIFY">GapY</B></FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Integer</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Промежуток между рамкой объекта и текстом.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">HideZeros</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Boolean</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Если True, не выводить нулевые значения переменных.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">LineSpacing</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Integer</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Расстояние между строками текста.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Suppress</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Boolean</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Подавлять повторяющиеся значения.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2 COLOR="#0000ff"><P ALIGN="JUSTIFY">TextOnly</B></FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Boolean</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2 COLOR="#0000ff"><P>Если True, обработка переменных не производится.</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2 COLOR="#ff0000"><P ALIGN="JUSTIFY">WordBreak</B></FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Boolean</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Переносить слова по слогам (только русские слова).</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2 COLOR="#ff0000"><P ALIGN="JUSTIFY">WordWrap</B></FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Boolean</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Переносить длинные слова на следующую строку.</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial" SIZE=2>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Методы: нет.</P>
+</FONT><B><I><FONT FACE="Arial"><P><A NAME="_Toc31093082"><A NAME="_Toc31093083">Объект "Рисунок" (TfrPictureView)</A></P>
+</B></I></FONT><FONT FACE="Arial" SIZE=2></FONT>
+<TABLE BORDER CELLSPACING=2 CELLPADDING=7 WIDTH=668>
+<TR><TD WIDTH="22%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Свойство</B></FONT></TD>
+<TD WIDTH="15%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Тип</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"></B></FONT></TD>
+<TD WIDTH="62%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Описание</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="22%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2 COLOR="#ff0000"><P ALIGN="JUSTIFY">BlobType</B></FONT></TD>
+<TD WIDTH="15%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Integer</FONT></TD>
+<TD WIDTH="62%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Тип рисунка, содержащегося в BLOb-поле. Одна из констант btBMP, </FONT><B><FONT FACE="Arial" SIZE=2 COLOR="#ff0000">btJPG</B></FONT><FONT FACE="Arial" SIZE=2>, btICO, btWMF.</FONT></TD>
+</TR>
+<TR><TD WIDTH="22%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Center</FONT></TD>
+<TD WIDTH="15%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Boolean</FONT></TD>
+<TD WIDTH="62%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Центрировать рисунок внутри объекта.</FONT></TD>
+</TR>
+<TR><TD WIDTH="22%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2 COLOR="#ff0000"><P ALIGN="JUSTIFY">DataField</B></FONT></TD>
+<TD WIDTH="15%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">String</FONT></TD>
+<TD WIDTH="62%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>BLOb-поле таблицы, содержащее рисунок.</FONT></TD>
+</TR>
+<TR><TD WIDTH="22%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">KeepAspect</FONT></TD>
+<TD WIDTH="15%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Boolean</FONT></TD>
+<TD WIDTH="62%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Сохранять пропорции рисунка при растягивании.</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial" SIZE=2>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>Подключаемые объекты</P>
+</FONT><I><FONT FACE="Arial"><P><A NAME="_Toc31093087">Объект "Прямоугольник с тенью" (TfrRoundRectView)</A></P>
+</B></I></FONT><FONT FACE="Arial" SIZE=2><P>&#9;Этот объект является потомком объекта "Текст".</FONT><FONT FACE="Arial" SIZE=2 COLOR="#ff0000"> </FONT><FONT FACE="Arial" SIZE=2>Следовательно, он имеет тот же набор свойств и методов, что и родитель, и кое-что свое:</P>
+</FONT><FONT FACE="Arial" SIZE=2></FONT>
+<TABLE BORDER CELLSPACING=2 CELLPADDING=7 WIDTH=668>
+<TR><TD WIDTH="21%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Свойство</B></FONT></TD>
+<TD WIDTH="14%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Тип</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"></B></FONT></TD>
+<TD WIDTH="65%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Описание</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">BeginColor</FONT></TD>
+<TD WIDTH="14%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Integer</FONT></TD>
+<TD WIDTH="65%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Начальный цвет градиентной заливки.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">EndColor</FONT></TD>
+<TD WIDTH="14%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Integer</FONT></TD>
+<TD WIDTH="65%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Конечный цвет градиентной заливки.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Gradient</FONT></TD>
+<TD WIDTH="14%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Boolean</FONT></TD>
+<TD WIDTH="65%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Использовать градиентную заливку.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">RoundRect</FONT></TD>
+<TD WIDTH="14%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Boolean</FONT></TD>
+<TD WIDTH="65%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Использовать закругление.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">RoundSize</FONT></TD>
+<TD WIDTH="14%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Integer</FONT></TD>
+<TD WIDTH="65%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Размер закругения.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">ShadowColor</FONT></TD>
+<TD WIDTH="14%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Integer</FONT></TD>
+<TD WIDTH="65%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Цвет тени.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">ShadowWidth</FONT></TD>
+<TD WIDTH="14%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Integer</FONT></TD>
+<TD WIDTH="65%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Ширина тени.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2 COLOR="#ff0000"><P ALIGN="JUSTIFY">Style</B></FONT></TD>
+<TD WIDTH="14%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Integer</FONT></TD>
+<TD WIDTH="65%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2 COLOR="#0000ff"><P>Стиль градиентной заливки</B></FONT><FONT FACE="Arial" SIZE=2>. Одна из констант gsVertical, gsHorizontal, gsElliptic, gsRectangle, gsHorizCenter, gsVertCenter.</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial" SIZE=2>
+</FONT><FONT FACE="Arial" SIZE=2><P>Методы: нет.</P>
+</FONT><B><I><FONT FACE="Arial"><P><A NAME="_Toc31093088">Объект "Фигура" (TfrShapeView)</A></P>
+</B></I></FONT><FONT FACE="Arial" SIZE=2></FONT>
+<TABLE BORDER CELLSPACING=2 CELLPADDING=7 WIDTH=668>
+<TR><TD WIDTH="22%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Свойство</B></FONT></TD>
+<TD WIDTH="15%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Тип</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"></B></FONT></TD>
+<TD WIDTH="62%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Описание</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="22%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Shape</FONT></TD>
+<TD WIDTH="15%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Integer</FONT></TD>
+<TD WIDTH="62%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Тип фигуры. Одно из значений skRectangle, skR</FONT><FONT FACE="Arial" SIZE=2>oundRectangle, skEllipse, skTriangle, skDiagonal1, skDiagonal2.</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial" SIZE=2>
+</FONT><FONT FACE="Arial" SIZE=2><P>Методы: нет.</P>
+</FONT><B><I><FONT FACE="Arial"><P><A NAME="_Toc31093086">Объекты "RichText", "RichText 2.0" (TfrRichView, TfrRXRichView)</A></P>
+</B></I></FONT><FONT FACE="Arial" SIZE=2></FONT>
+<TABLE BORDER CELLSPACING=2 CELLPADDING=7 WIDTH=668>
+<TR><TD WIDTH="21%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Свойство</B></FONT></TD>
+<TD WIDTH="14%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Тип</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"></B></FONT></TD>
+<TD WIDTH="65%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Описание</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">GapX</FONT></TD>
+<TD WIDTH="14%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Integer</FONT></TD>
+<TD WIDTH="65%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Промежуток между рамкой объекта и текстом.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">GapY</FONT></TD>
+<TD WIDTH="14%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Integer</FONT></TD>
+<TD WIDTH="65%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Промежуток между рамкой объекта и текстом.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">TextOnly</FONT></TD>
+<TD WIDTH="14%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Boolean</FONT></TD>
+<TD WIDTH="65%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Если True, обработка переменных не производится.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">DataField</FONT></TD>
+<TD WIDTH="14%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">String</FONT></TD>
+<TD WIDTH="65%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>BLOb-поле таблицы, содержащее данные.</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial" SIZE=2>
+</FONT><FONT FACE="Arial" SIZE=2><P>Методы: нет.</P>
+</FONT><B><I><FONT FACE="Arial"><P><A NAME="_Toc31093084">Объект "Штрихкод" (TfrBarcodeView)</A></P>
+</B></I></FONT><FONT FACE="Arial" SIZE=2></FONT>
+<TABLE BORDER CELLSPACING=2 CELLPADDING=7 WIDTH=668>
+<TR><TD WIDTH="22%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Свойство</B></FONT></TD>
+<TD WIDTH="15%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Тип</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"></B></FONT></TD>
+<TD WIDTH="62%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Описание</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="22%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">DataField</FONT></TD>
+<TD WIDTH="15%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">String</FONT></TD>
+<TD WIDTH="62%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Поле таблицы, содержащее данные.</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial" SIZE=2>
+</FONT><FONT FACE="Arial" SIZE=2><P>Методы: нет.</P>
+</FONT><B><I><FONT FACE="Arial"><P>Объект "Бэнд" (TfrBandView)</A></P>
+</B></I></FONT><FONT FACE="Arial" SIZE=2></FONT>
+<TABLE BORDER CELLSPACING=2 CELLPADDING=7 WIDTH=668>
+<TR><TD WIDTH="24%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Свойство</B></FONT></TD>
+<TD WIDTH="14%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Тип</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"></B></FONT></TD>
+<TD WIDTH="62%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Описание</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2 COLOR="#ff0000"><P ALIGN="JUSTIFY">Breaked</B></FONT></TD>
+<TD WIDTH="14%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Boolean</FONT></TD>
+<TD WIDTH="62%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Бэнд является разрываемым.</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">ChildBand</FONT></TD>
+<TD WIDTH="14%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">String</FONT></TD>
+<TD WIDTH="62%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Дочерний бэнд.</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">ColumnGap</FONT></TD>
+<TD WIDTH="14%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Integer</FONT></TD>
+<TD WIDTH="62%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Промежуток между колонками.</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Columns</FONT></TD>
+<TD WIDTH="14%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Integer</FONT></TD>
+<TD WIDTH="62%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Количество колонок у дата-бэнда</FONT><FONT FACE="Arial" SIZE=2>.</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">ColumnWidth</FONT></TD>
+<TD WIDTH="14%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Integer</FONT></TD>
+<TD WIDTH="62%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Ширина колонки.</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2 COLOR="#ff0000"><P ALIGN="JUSTIFY">Condition</B></FONT></TD>
+<TD WIDTH="14%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">String</FONT></TD>
+<TD WIDTH="62%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2 COLOR="#0000ff"><P>Условие группировки для бэнда group header.</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2 COLOR="#ff0000"><P ALIGN="JUSTIFY">DataSource</B></FONT></TD>
+<TD WIDTH="14%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">String</FONT></TD>
+<TD WIDTH="62%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Источник данных для дата-бэнда.</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">EOF</FONT></TD>
+<TD WIDTH="14%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Boolean</FONT></TD>
+<TD WIDTH="62%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>True, если достигнут конец набора записей, связанного с бэндом.</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">FormNewPage</FONT></TD>
+<TD WIDTH="14%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Boolean</FONT></TD>
+<TD WIDTH="62%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Формировать новую страницу после печати бэнда и всех его детальных бэндов.</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2 COLOR="#ff0000"><P ALIGN="JUSTIFY">Master</B></FONT></TD>
+<TD WIDTH="14%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">String</FONT></TD>
+<TD WIDTH="62%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2 COLOR="#0000ff"><P>Бэнд, по которому выполняется группировка.</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">OnFirstPage</FONT></TD>
+<TD WIDTH="14%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Boolean</FONT></TD>
+<TD WIDTH="62%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Печатать на первой странице.</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">OnLastPage</FONT></TD>
+<TD WIDTH="14%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Boolean</FONT></TD>
+<TD WIDTH="62%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Печатать на последней странице.</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">PrintChildIfInvisible</FONT></TD>
+<TD WIDTH="14%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Boolean</FONT></TD>
+<TD WIDTH="62%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Печатать дочерние (child) бэнды, если родительский бэнд невидимый.</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2 COLOR="#ff0000"><P ALIGN="JUSTIFY">PrintIfSubsetEmpty</B></FONT></TD>
+<TD WIDTH="14%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Boolean</FONT></TD>
+<TD WIDTH="62%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Печатать бэнд, если его детальный список пуст.</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2 COLOR="#ff0000"><P ALIGN="JUSTIFY">RepeatHeader</B></FONT></TD>
+<TD WIDTH="14%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Boolean</FONT></TD>
+<TD WIDTH="62%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Повторять бэнд на новой странице.</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial" SIZE=2>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Методы:</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P></FONT>
+<TABLE BORDER CELLSPACING=2 CELLPADDING=7 WIDTH=668>
+<TR><TD WIDTH="21%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Метод</B></FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Параметры</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"></B></FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Описание</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">First</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">-</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Устанавливает источник данных, связанный с бэндом, на первую запись.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Next</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">-</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Устанавливает источник на следующую запись.</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Prior</FONT></TD>
+<TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">-</FONT></TD>
+<TD WIDTH="64%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Устанавливает источник на предыдущую запись.</FONT></TD>
+</TR>
+</TABLE>
+
+<B><I><FONT FACE="Arial"><P><A NAME="_Toc31093085">Объект "CheckBox" (TfrCheckBoxView)</A></P>
+</B></I></FONT><FONT FACE="Arial" SIZE=2></FONT>
+<TABLE BORDER CELLSPACING=2 CELLPADDING=7 WIDTH=668>
+<TR><TD WIDTH="22%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Свойство</B></FONT></TD>
+<TD WIDTH="15%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Тип</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER"></B></FONT></TD>
+<TD WIDTH="62%" VALIGN="TOP" BGCOLOR="#ffffff">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Описание</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="22%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">CheckColor</FONT></TD>
+<TD WIDTH="15%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Integer</FONT></TD>
+<TD WIDTH="62%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Цвет крестика.</FONT></TD>
+</TR>
+<TR><TD WIDTH="22%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">CheckStyle</FONT></TD>
+<TD WIDTH="15%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Integer</FONT></TD>
+<TD WIDTH="62%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Стиль (крестик/галочка). Константы csCross, csCheck.</FONT></TD>
+</TR>
+<TR><TD WIDTH="22%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">DataField</FONT></TD>
+<TD WIDTH="15%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">String</FONT></TD>
+<TD WIDTH="62%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Поле таблицы, содержащее данные.</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial" SIZE=2>
+</FONT><FONT FACE="Arial" SIZE=2><P>Методы: нет.</P>
+</FONT><FONT FACE="Arial" SIZE=2>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P><A NAME="_Toc486331275"><A NAME="_Toc486331827"><A NAME="_Toc486333006"><A NAME="_Toc486333479"><A NAME="_Toc31093102">Примеры программирования</A></A></A></A></A> в дизайнере отчетов</P>
+</B></FONT><FONT FACE="Arial" SIZE=2><P>Вот некоторые простые примеры использования интерпретатора:</P>
+</FONT><FONT FACE="Arial" SIZE=2>
+<OL>
+
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"><LI>Необходимо вывести сумму заказа: белым фоном, если сумма меньше 2000; зеленым, если сумма от 2000 до 10000; красным, если сумма больше 10000. Для этого <U>в объекте с суммой необходимо набрать следующий скрипт</U></FONT><FONT FACE="Arial" SIZE=2>:</LI></P></OL>
+
+</FONT><FONT FACE="Courier New" SIZE=2 COLOR="#000080">
+<B><P>if</B></FONT><FONT FACE="Courier New" SIZE=2 COLOR="#000080"> [Сумма] &lt; 2000 </FONT><B><FONT FACE="Courier New" SIZE=2 COLOR="#000080">then</P>
+</B><P>  FillColor := clTransparent</P>
+<B><P>else</B> <B>if</B></FONT><FONT FACE="Courier New" SIZE=2 COLOR="#000080"> [Сумма] &lt; 10000 </FONT><B><FONT FACE="Courier New" SIZE=2 COLOR="#000080">then</P>
+</B><P>  FillColor := clGreen</P>
+<B><P>else</B> </P>
+<P>  FillColor := clRed</P>
+
+</FONT><FONT FACE="Arial" SIZE=2><P>Цвет можно задать числом, например: </P>
+</FONT><FONT FACE="Courier New" SIZE=2 COLOR="#000080">
+<P>FillColor := 128 + 128*256 + 128*65536 //(</FONT><FONT FACE="Arial" SIZE=2 COLOR="#000080">серый цвет)</P>
+</FONT><FONT FACE="Courier New" SIZE=2 COLOR="#000080">
+<OL START=2>
+
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"><LI>Необходимо вывести те записи, для которых сумма заказа больше 2000. Для этого</FONT><FONT FACE="Arial" SIZE=2 COLOR="#ff0000"> </FONT><U><FONT FACE="Arial" SIZE=2 COLOR="#ff0000">в бэнде необходимо набрать следующий скрипт</U></FONT><FONT FACE="Arial" SIZE=2> (редактор можно вызвать из инспектора объектов):</LI></P></OL>
+
+</FONT><FONT FACE="Courier New" SIZE=2 COLOR="#000080">
+<B><P ALIGN="JUSTIFY">if</B></FONT><FONT FACE="Courier New" SIZE=2 COLOR="#000080"> [Сумма] &gt; 2000 </FONT><B><FONT FACE="Courier New" SIZE=2 COLOR="#000080">then</P>
+</B><P ALIGN="JUSTIFY">  Visible := 1 <B>else</P>
+</B><P ALIGN="JUSTIFY">  Visible := 0</P>
+
+<OL START=3>
+
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"><LI>Пользуясь функцией FreeSpace, которая возвращает размер свободного места на листе, и процедурой NewPage, которая начинает печать с новой страницы (или NewColumn&nbsp;– с новой колонки), можно управлять процессом формирования отчета. Например: если места осталось меньше 30мм, начать печать со следующего листа. Для этого <U>в скрипте нужного бэнда </U>необходимо набрать следующее:</LI></P></OL>
+
+</FONT><FONT FACE="Courier New" SIZE=2 COLOR="#000080">
+<B><P>if</B> FreeSpace * 5/18 &lt; 30 <B>then</B> NewPage</P>
+</FONT><FONT FACE="Arial" SIZE=2>
+<OL START=4>
+
+</FONT><FONT FACE="Arial" SIZE=2><LI>Для того, чтобы вывести бэнд Report summary внизу страницы, используйте следующий код в скрипте этого бэнда:</LI></OL>
+
+</FONT><FONT FACE="Arial" SIZE=2><P>&#9;&#9;</P>
+</FONT><FONT FACE="Courier New" SIZE=2 COLOR="#000080"><P>CurY := PageHeight - Height</P>
+</FONT><FONT FACE="Arial" SIZE=2>
+<P>&nbsp;</P></FONT></BODY>
+</HTML>
